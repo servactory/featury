@@ -30,20 +30,20 @@ In this case, the base class might look like this:
 
 ```ruby
 class ApplicationFeature < Featury::Base
-  action :enabled? do |features:|
-    features.all? { |feature| Flipper.enabled?(feature) }
+  action :enabled? do |features:, **options|
+    features.all? { |feature| Flipper.enabled?(feature, *options.values) }
   end
 
-  action :disabled? do |features:|
-    features.any? { |feature| !Flipper.enabled?(feature) }
+  action :disabled? do |features:, **options|
+    features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
   end
 
-  action :enable do |features:|
-    features.all? { |feature| Flipper.enable(feature) }
+  action :enable do |features:, **options|
+    features.all? { |feature| Flipper.enable(feature, *options.values) }
   end
 
-  action :disable do |features:|
-    features.all? { |feature| Flipper.disable(feature) }
+  action :disable do |features:, **options|
+    features.all? { |feature| Flipper.disable(feature, *options.values) }
   end
 end
 ```

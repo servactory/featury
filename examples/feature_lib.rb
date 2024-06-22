@@ -2,20 +2,20 @@
 
 # This is a simple class intended for use in RSpec.
 class FeatureLib
-  def self.enabled?(name, **options)
-    new(name).enabled?(**options)
+  def self.enabled?(name, *arguments)
+    new(name).enabled?(*arguments)
   end
 
-  def self.disabled?(name, **options)
-    new(name).disabled?(**options)
+  def self.disabled?(name, *arguments)
+    new(name).disabled?(*arguments)
   end
 
-  def self.enable(name, **options)
-    new(name).enable(**options)
+  def self.enable(name, *arguments)
+    new(name).enable(*arguments)
   end
 
-  def self.disable(name, **options)
-    new(name).disable(**options)
+  def self.disable(name, *arguments)
+    new(name).disable(*arguments)
   end
 
   def initialize(name)
@@ -23,19 +23,19 @@ class FeatureLib
     @flag = true
   end
 
-  def enabled?(**_options)
+  def enabled?(*_arguments)
     @flag
   end
 
-  def disabled?(**_options)
+  def disabled?(*_arguments)
     !@flag
   end
 
-  def enable(**_options)
+  def enable(*_arguments)
     @flag = true
   end
 
-  def disable(**_options)
+  def disable(*_arguments)
     @flag = false
   end
 end
