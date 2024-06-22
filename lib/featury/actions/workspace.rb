@@ -5,10 +5,10 @@ module Featury
     module Workspace
       private
 
-      def call!(action:, **)
-        super
+      def call!(action:, collection_of_features:, **)
+        puts ":: Actions::Workspace » call!"
 
-        action.block.call(features: [])
+        super && Featury::Actions::Tools::Performer.perform!(self, action, collection_of_features)
       end
     end
   end

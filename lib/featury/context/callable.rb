@@ -22,8 +22,9 @@ module Featury
       def _call!(context, action)
         context.send(
           :_call!,
-          action: action
-          # collection_of_actions: collection_of_actions,
+          action: action,
+          collection_of_conditions: collection_of_conditions,
+          collection_of_features: collection_of_features
         )
       end
     end

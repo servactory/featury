@@ -5,7 +5,7 @@ class Usual::Example1::Feature1::D < Usual::Example1::Base
 
   resource :record, type: Record
 
-  main_condition ->(resources:) do
+  condition ->(resources:) do
     # resources.record.id == "777"
     true
   end

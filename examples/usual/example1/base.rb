@@ -10,10 +10,10 @@ class Usual::Example1::Base < Featury::Base
   end
 
   action :enable do |features:|
-    features.each { |feature| FeatureLib.enable(feature) }
+    features.all? { |feature| FeatureLib.enable(feature) }
   end
 
   action :disable do |features:|
-    features.each { |feature| FeatureLib.disable(feature) }
+    features.all? { |feature| FeatureLib.disable(feature) }
   end
 end
