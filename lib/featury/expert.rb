@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Featury
-  class Result < Servactory::Result; end
+  class Expert < Servactory::Result; end
 end

@@ -3,7 +3,7 @@
 module Featury
   module Actions
     module Service
-      class ServiceFactory
+      class Factory
         def self.create(...)
           new(...).create
         end
@@ -14,11 +14,11 @@ module Featury
         end
 
         def create
-          return if @model_class.const_defined?(ServiceBuilder::SERVICE_CLASS_NAME)
+          return if @model_class.const_defined?(Builder::SERVICE_CLASS_NAME)
 
           class_sample = create_service_class
 
-          @model_class.const_set(ServiceBuilder::SERVICE_CLASS_NAME, class_sample)
+          @model_class.const_set(Builder::SERVICE_CLASS_NAME, class_sample)
         end
 
         def create_service_class # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -39,13 +39,13 @@ module Featury
             internal :features, type: [TrueClass, FalseClass]
             internal :groups, type: [TrueClass, FalseClass]
 
-            output :result, type: [TrueClass, FalseClass]
+            output :all_true, type: [TrueClass, FalseClass]
 
             make :conditions
             make :features
             make :groups
 
-            make :result
+            make :all_true
 
             private
 
@@ -69,8 +69,8 @@ module Featury
               end
             end
 
-            def result
-              outputs.result = internals.conditions && internals.features && internals.groups
+            def all_true
+              outputs.all_true = internals.conditions && internals.features && internals.groups
             end
           end
         end

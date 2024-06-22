@@ -12,11 +12,11 @@ module Featury
 
         failure_class Featury::Service::Exceptions::Failure
 
-        result_class Featury::Result
+        result_class Featury::Expert
 
         i18n_root_key :featury
 
-        predicate_methods_enabled false
+        predicate_methods_enabled true
       end
     end
   end
