@@ -4,10 +4,7 @@ class Usual::Example1::Feature1::E < Usual::Example1::Base
   resource :record, type: Usual::Example1::Feature1::Record
   resource :user, type: Usual::Example1::Feature1::User
 
-  condition ->(resources:) do
-    # resources.record.id == "777"
-    true
-  end
+  condition ->(resources:) { resources.record.id == "123" }
 
   prefix :example_1_feature_1_e
 

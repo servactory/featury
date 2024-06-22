@@ -17,7 +17,7 @@ module Featury
         puts ":: Actions::Workspace » call!"
 
         super &&
-          Featury::Actions::Tools::Performer.perform!(self, action, collection_of_features) &&
+          # Featury::Actions::Tools::Performer.perform!(self, action, collection_of_features) &&
           Service::ServiceBuilder.build_and_call!(
             self,
             action,
