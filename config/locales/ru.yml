@@ -1,0 +1,101 @@
+ru:
+  featury:
+    common:
+      undefined_method:
+        missing_name: "[%{service_class_name}] %{error_text}"
+    methods:
+      call:
+        not_used: "[%{service_class_name}] Нечего выполнять. Используйте `make` или создайте метод `call`."
+      cannot_be_overwritten: "[%{service_class_name}] Нельзя перезаписать следующие методы: %{list_of_methods}"
+    inputs:
+      undefined:
+        getter: "[%{service_class_name}] Неизвестный входящий атрибут `%{input_name}`"
+        setter: "[%{service_class_name}] Неизвестный входящий атрибут `%{input_name}`"
+      validations:
+        inclusion:
+          default_error: "[%{service_class_name}] Неправильное значение в `%{input_name}`, должно быть одним из `%{input_inclusion}`"
+        must:
+          default_error: "[%{service_class_name}] Инпут `%{input_name}` должен \"%{code}\""
+          syntax_error: "[%{service_class_name}] Синтаксическая ошибка внутри `%{code}` инпута `%{input_name}`: %{exception_message}"
+          dynamic_options:
+            consists_of:
+              required: "[%{service_class_name}] Отсутствует обязательный элемент в коллекции инпута `%{input_name}`"
+              wrong_type: "[%{service_class_name}] Неправильный тип коллекции инпута `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Неправильный тип элемента в коллекции инпута `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+            format:
+              default: "[%{service_class_name}] Инпут `%{input_name}` не соответствует формату `%{format_name}`"
+              wrong_pattern: "[%{service_class_name}] Инпут `%{input_name}` не соответствует формату `%{format_name}`"
+              unknown: "[%{service_class_name}] Указан неизвестный формат `%{format_name}` у инпута `%{input_name}`"
+            min:
+              default: "[%{service_class_name}] Инпут `%{input_name}` получил значение `%{value}`, которое меньше `%{option_value}`"
+            max:
+              default: "[%{service_class_name}] Инпут `%{input_name}` получил значение `%{value}`, которое больше `%{option_value}`"
+        required:
+          default_error:
+            default: "[%{service_class_name}] Обязательный инпут `%{input_name}` отсутствует"
+        type:
+          default_error:
+            default: "[%{service_class_name}] Неправильный тип инпута `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+            for_hash:
+              wrong_element_type: "[%{service_class_name}] Неправильный тип в хеше инпута `%{input_name}`, для `%{key_name}` ожидалось `%{expected_type}`, получено `%{given_type}`"
+      tools:
+        find_unnecessary:
+          error: "[%{service_class_name}] Неожиданные атрибуты: `%{unnecessary_attributes}`"
+        rules:
+          error: "[%{service_class_name}] Конфликт в опциях инпута `%{input_name}`: `%{conflict_code}`"
+    internals:
+      undefined:
+        getter: "[%{service_class_name}] Неизвестный внутренний атрибут `%{internal_name}`"
+        setter: "[%{service_class_name}] Неизвестный внутренний атрибут `%{internal_name}`"
+      validations:
+        inclusion:
+          default_error: "[%{service_class_name}] Неправильное значение в `%{internal_name}`, должно быть одним из `%{internal_inclusion}`"
+        must:
+          default_error: "[%{service_class_name}] Внутренний атрибут `%{internal_name}` должен \"%{code}\""
+          syntax_error: "[%{service_class_name}] Синтаксическая ошибка внутри `%{code}` внутреннего атрибута `%{internal_name}`: %{exception_message}"
+          dynamic_options:
+            consists_of:
+              required: "[%{service_class_name}] Отсутствует обязательный элемент в коллекции внутреннего атрибута `%{internal_name}`"
+              wrong_type: "[%{service_class_name}] Неправильный тип коллекции внутреннего атрибута `%{internal_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Неправильный тип элемента в коллекции внутреннего атрибута `%{internal_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+            format:
+              default: "[%{service_class_name}] Внутренний атрибут `%{internal_name}` не соответствует формату `%{format_name}`"
+              wrong_pattern: "[%{service_class_name}] Внутренний атрибут `%{internal_name}` не соответствует формату `%{format_name}`"
+              unknown: "[%{service_class_name}] Указан неизвестный формат `%{format_name}` у внутреннего атрибута `%{internal_name}`"
+            min:
+              default: "[%{service_class_name}] Внутренний атрибут `%{internal_name}` получил значение `%{value}`, которое меньше `%{option_value}`"
+            max:
+              default: "[%{service_class_name}] Внутренний атрибут `%{internal_name}` получил значение `%{value}`, которое больше `%{option_value}`"
+        type:
+          default_error:
+            default: "[%{service_class_name}] Неправильный тип внутреннего атрибута `%{internal_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+            for_hash:
+              wrong_element_type: "[%{service_class_name}] Неправильный тип в хеше внутреннего атрибута `%{internal_name}`, для `%{key_name}` ожидалось `%{expected_type}`, получено `%{given_type}`"
+    outputs:
+      undefined:
+        getter: "[%{service_class_name}] Неизвестный выходящий атрибут `%{output_name}`"
+        setter: "[%{service_class_name}] Неизвестный выходящий атрибут `%{output_name}`"
+      validations:
+        inclusion:
+          default_error: "[%{service_class_name}] Неправильное значение в `%{output_name}`, должно быть одним из `%{output_inclusion}`"
+        must:
+          default_error: "[%{service_class_name}] Выходящий атрибут `%{output_name}` должен \"%{code}\""
+          syntax_error: "[%{service_class_name}] Синтаксическая ошибка внутри `%{code}` выходящего атрибута `%{output_name}`: %{exception_message}"
+          dynamic_options:
+            consists_of:
+              required: "[%{service_class_name}] Отсутствует обязательный элемент в коллекции выходящего атрибута `%{output_name}`"
+              wrong_type: "[%{service_class_name}] Неправильный тип коллекции выходящего атрибута `%{output_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Неправильный тип элемента в коллекции выходящего атрибута `%{output_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+            format:
+              default: "[%{service_class_name}] Выходящий атрибут `%{output_name}` не соответствует формату `%{format_name}`"
+              wrong_pattern: "[%{service_class_name}] Выходящий атрибут `%{output_name}` не соответствует формату `%{format_name}`"
+              unknown: "[%{service_class_name}] Указан неизвестный формат `%{format_name}` у выходящего атрибута `%{output_name}`"
+            min:
+              default: "[%{service_class_name}] Выходящий атрибут `%{output_name}` получил значение `%{value}`, которое меньше `%{option_value}`"
+            max:
+              default: "[%{service_class_name}] Выходящий атрибут `%{output_name}` получил значение `%{value}`, которое больше `%{option_value}`"
+        type:
+          default_error:
+            default: "[%{service_class_name}] Неправильный тип выходящего атрибута `%{output_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+            for_hash:
+              wrong_element_type: "[%{service_class_name}] Неправильный тип в хеше выходящего атрибута `%{output_name}`, для `%{key_name}` ожидалось `%{expected_type}`, получено `%{given_type}`"

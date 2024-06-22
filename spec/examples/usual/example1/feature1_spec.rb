@@ -1,26 +1,33 @@
 # frozen_string_literal: true
 
 RSpec.describe Usual::Example1::Feature1 do
+  let(:arguments) do
+    {
+      record: Usual::Example1::Feature1::Record.new(id: "123"),
+      user: Usual::Example1::Feature1::User.new(id: "456")
+    }
+  end
+
   describe "#enabled?" do
-    subject(:perform) { described_class.enabled? }
+    subject(:perform) { described_class.enabled?(**arguments) }
 
     it { expect(perform).to be(true) }
   end
 
   describe "#disabled?" do
-    subject(:perform) { described_class.disabled? }
+    subject(:perform) { described_class.disabled?(**arguments) }
 
     it { expect(perform).to be(false) }
   end
 
   describe "#enable" do
-    subject(:perform) { described_class.enable }
+    subject(:perform) { described_class.enable(**arguments) }
 
     it { expect(perform).to be(true) }
   end
 
   describe "#disable" do
-    subject(:perform) { described_class.disable }
+    subject(:perform) { described_class.disable(**arguments) }
 
     it { expect(perform).to be(false) }
   end

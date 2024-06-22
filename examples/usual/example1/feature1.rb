@@ -2,8 +2,10 @@
 
 class Usual::Example1::Feature1 < Usual::Example1::Base
   Record = Struct.new(:id, keyword_init: true)
+  User = Struct.new(:id, keyword_init: true)
 
   resource :record, type: Record
+  resource :user, type: User
 
   condition ->(resources:) do
     # resources.record.id == "777"
@@ -11,6 +13,8 @@ class Usual::Example1::Feature1 < Usual::Example1::Base
   end
 
   prefix :example_1_feature_1
+
+  # TODO: Нужно как-то учесть ресурс `user` и научиться передавать его в `action`.
 
   features(
     :a, # full » :example_1_feature_1_a
