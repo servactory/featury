@@ -16,7 +16,8 @@ module Featury
           incoming_arguments,
           collection_of_resources,
           collection_of_conditions,
-          collection_of_features
+          collection_of_features,
+          collection_of_groups
         )
           @context = context
           @action = action
@@ -24,6 +25,7 @@ module Featury
           @collection_of_resources = collection_of_resources
           @collection_of_conditions = collection_of_conditions
           @collection_of_features = collection_of_features
+          @collection_of_groups = collection_of_groups
         end
 
         def build_and_call!
@@ -33,7 +35,8 @@ module Featury
             action: @action,
             **@incoming_arguments,
             collection_of_conditions: @collection_of_conditions,
-            collection_of_features: @collection_of_features
+            collection_of_features: @collection_of_features,
+            collection_of_groups: @collection_of_groups
           )
         end
 

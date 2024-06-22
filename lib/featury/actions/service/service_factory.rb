@@ -33,14 +33,17 @@ module Featury
 
             input :collection_of_conditions, type: Featury::Conditions::Collection
             input :collection_of_features, type: Featury::Features::Collection
+            input :collection_of_groups, type: Featury::Groups::Collection
 
             internal :conditions, type: [TrueClass, FalseClass]
             internal :features, type: [TrueClass, FalseClass]
+            internal :groups, type: [TrueClass, FalseClass]
 
             output :result, type: [TrueClass, FalseClass]
 
             make :conditions
             make :features
+            make :groups
 
             make :result
 
@@ -54,6 +57,16 @@ module Featury
 
             def features
               internals.features = inputs.action.block.call(features: inputs.collection_of_features.list)
+            end
+
+            def groups
+              arguments = inputs.instance_variable_get(:@collection_of_inputs).names.to_h do |input_name|
+                [input_name, inputs.public_send(input_name)]
+              end
+
+              internals.groups = inputs.collection_of_groups.all? do |group|
+                group.group.public_send(inputs.action.name, **arguments)
+              end
             end
 
             def result

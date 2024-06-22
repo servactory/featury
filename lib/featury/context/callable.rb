@@ -26,7 +26,8 @@ module Featury
           incoming_arguments: arguments.symbolize_keys,
           collection_of_resources: collection_of_resources,
           collection_of_conditions: collection_of_conditions,
-          collection_of_features: collection_of_features
+          collection_of_features: collection_of_features,
+          collection_of_groups: collection_of_groups
         )
       end
     end
