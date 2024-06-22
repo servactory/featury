@@ -41,25 +41,25 @@ module Featury
 
             output :all_true, type: [TrueClass, FalseClass]
 
-            make :conditions_are_true
-            make :features_are_true
-            make :groups_are_true
+            check :conditions
+            check :features
+            check :groups
 
-            make :all_true
+            check :all
 
             private
 
-            def conditions_are_true
+            def check_conditions
               internals.conditions_are_true = inputs.collection_of_conditions.all? do |condition|
                 condition.block.call(resources: inputs)
               end
             end
 
-            def features_are_true
+            def check_features
               internals.features_are_true = inputs.action.block.call(features: inputs.collection_of_features.list)
             end
 
-            def groups_are_true
+            def check_groups
               arguments = inputs.instance_variable_get(:@collection_of_inputs).names.to_h do |input_name|
                 [input_name, inputs.public_send(input_name)]
               end
@@ -69,7 +69,7 @@ module Featury
               end
             end
 
-            def all_true
+            def check_all
               outputs.all_true =
                 internals.conditions_are_true &&
                 internals.features_are_true &&

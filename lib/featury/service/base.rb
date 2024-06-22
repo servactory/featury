@@ -14,6 +14,8 @@ module Featury
 
         result_class Featury::Expert
 
+        action_shortcuts %i[check]
+
         i18n_root_key :featury
 
         predicate_methods_enabled true
