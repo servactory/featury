@@ -35,42 +35,45 @@ module Featury
             input :collection_of_features, type: Featury::Features::Collection
             input :collection_of_groups, type: Featury::Groups::Collection
 
-            internal :conditions, type: [TrueClass, FalseClass]
-            internal :features, type: [TrueClass, FalseClass]
-            internal :groups, type: [TrueClass, FalseClass]
+            internal :conditions_are_true, type: [TrueClass, FalseClass]
+            internal :features_are_true, type: [TrueClass, FalseClass]
+            internal :groups_are_true, type: [TrueClass, FalseClass]
 
             output :all_true, type: [TrueClass, FalseClass]
 
-            make :conditions
-            make :features
-            make :groups
+            make :conditions_are_true
+            make :features_are_true
+            make :groups_are_true
 
             make :all_true
 
             private
 
-            def conditions
-              internals.conditions = inputs.collection_of_conditions.all? do |condition|
+            def conditions_are_true
+              internals.conditions_are_true = inputs.collection_of_conditions.all? do |condition|
                 condition.block.call(resources: inputs)
               end
             end
 
-            def features
-              internals.features = inputs.action.block.call(features: inputs.collection_of_features.list)
+            def features_are_true
+              internals.features_are_true = inputs.action.block.call(features: inputs.collection_of_features.list)
             end
 
-            def groups
+            def groups_are_true
               arguments = inputs.instance_variable_get(:@collection_of_inputs).names.to_h do |input_name|
                 [input_name, inputs.public_send(input_name)]
               end
 
-              internals.groups = inputs.collection_of_groups.all? do |group|
+              internals.groups_are_true = inputs.collection_of_groups.all? do |group|
                 group.group.public_send(inputs.action.name, **arguments)
               end
             end
 
             def all_true
-              outputs.all_true = internals.conditions && internals.features && internals.groups
+              outputs.all_true =
+                internals.conditions_are_true &&
+                internals.features_are_true &&
+                internals.groups_are_true
             end
           end
         end
