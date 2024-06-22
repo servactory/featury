@@ -6,8 +6,8 @@ module Usual
       Record = Struct.new(:id, keyword_init: true)
       User = Struct.new(:id, keyword_init: true)
 
-      resource :record, type: Record
-      resource :user, type: User
+      resource :record, type: Record, nested: true
+      resource :user, type: User, option: true
 
       condition ->(resources:) { resources.record.id == "123" }
 

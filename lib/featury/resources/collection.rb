@@ -9,6 +9,14 @@ module Featury
       def initialize(collection = Set.new)
         @collection = collection
       end
+
+      def only_nested
+        Collection.new(filter(&:nested?))
+      end
+
+      def only_option
+        Collection.new(filter(&:option?))
+      end
     end
   end
 end

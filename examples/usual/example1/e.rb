@@ -4,7 +4,6 @@ module Usual
   module Example1
     class E < Usual::Example1::Base
       resource :record, type: Usual::Example1::Main::Record
-      resource :user, type: Usual::Example1::Main::User
 
       condition ->(resources:) { resources.record.id == "123" }
 
