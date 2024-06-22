@@ -9,40 +9,40 @@ en:
       cannot_be_overwritten: "[%{service_class_name}] The following methods cannot be overwritten: %{list_of_methods}"
     inputs:
       undefined:
-        getter: "[%{service_class_name}] Undefined input attribute `%{input_name}`"
-        setter: "[%{service_class_name}] Undefined input attribute `%{input_name}`"
+        getter: "[%{service_class_name}] Undefined resource attribute `%{input_name}`"
+        setter: "[%{service_class_name}] Undefined resource attribute `%{input_name}`"
       validations:
         inclusion:
           default_error: "[%{service_class_name}] Wrong value in `%{input_name}`, must be one of `%{input_inclusion}`"
         must:
-          default_error: "[%{service_class_name}] Input `%{input_name}` must \"%{code}\""
-          syntax_error: "[%{service_class_name}] Syntax error inside `%{code}` of `%{input_name}` input: %{exception_message}"
+          default_error: "[%{service_class_name}] Resource `%{input_name}` must \"%{code}\""
+          syntax_error: "[%{service_class_name}] Syntax error inside `%{code}` of `%{input_name}` resource: %{exception_message}"
           dynamic_options:
             consists_of:
-              required: "[%{service_class_name}] Required element in input collection `%{input_name}` is missing"
-              wrong_type: "[%{service_class_name}] Wrong input collection type `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
-              wrong_element_type: "[%{service_class_name}] Wrong element type in input collection `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
+              required: "[%{service_class_name}] Required element in resource collection `%{input_name}` is missing"
+              wrong_type: "[%{service_class_name}] Wrong resource collection type `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Wrong element type in resource collection `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
             format:
-              default: "[%{service_class_name}] Input `%{input_name}` does not match `%{format_name}` format"
-              wrong_pattern: "[%{service_class_name}] Input `%{input_name}` does not match `%{format_name}` format"
-              unknown: "[%{service_class_name}] Unknown `%{format_name}` format specified for input `%{input_name}`"
+              default: "[%{service_class_name}] Resource `%{input_name}` does not match `%{format_name}` format"
+              wrong_pattern: "[%{service_class_name}] Resource `%{input_name}` does not match `%{format_name}` format"
+              unknown: "[%{service_class_name}] Unknown `%{format_name}` format specified for resource `%{input_name}`"
             min:
-              default: "[%{service_class_name}] Input `%{input_name}` received value `%{value}`, which is less than `%{option_value}`"
+              default: "[%{service_class_name}] Resource `%{input_name}` received value `%{value}`, which is less than `%{option_value}`"
             max:
-              default: "[%{service_class_name}] Input `%{input_name}` received value `%{value}`, which is greater than `%{option_value}`"
+              default: "[%{service_class_name}] Resource `%{input_name}` received value `%{value}`, which is greater than `%{option_value}`"
         required:
           default_error:
-            default: "[%{service_class_name}] Required input `%{input_name}` is missing"
+            default: "[%{service_class_name}] Required resource `%{input_name}` is missing"
         type:
           default_error:
-            default: "[%{service_class_name}] Wrong type of input `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
+            default: "[%{service_class_name}] Wrong type of resource `%{input_name}`, expected `%{expected_type}`, got `%{given_type}`"
             for_hash:
-              wrong_element_type: "[%{service_class_name}] Wrong type in input hash `%{input_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Wrong type in resource hash `%{input_name}`, expected `%{expected_type}` for `%{key_name}`, got `%{given_type}`"
       tools:
         find_unnecessary:
           error: "[%{service_class_name}] Unexpected attributes: `%{unnecessary_attributes}`"
         rules:
-          error: "[%{service_class_name}] Conflict in `%{input_name}` input options: `%{conflict_code}`"
+          error: "[%{service_class_name}] Conflict in `%{input_name}` resource options: `%{conflict_code}`"
     internals:
       undefined:
         getter: "[%{service_class_name}] Undefined internal attribute `%{internal_name}`"

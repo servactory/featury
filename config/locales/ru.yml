@@ -15,34 +15,34 @@ ru:
         inclusion:
           default_error: "[%{service_class_name}] Неправильное значение в `%{input_name}`, должно быть одним из `%{input_inclusion}`"
         must:
-          default_error: "[%{service_class_name}] Инпут `%{input_name}` должен \"%{code}\""
-          syntax_error: "[%{service_class_name}] Синтаксическая ошибка внутри `%{code}` инпута `%{input_name}`: %{exception_message}"
+          default_error: "[%{service_class_name}] Ресурс `%{input_name}` должен \"%{code}\""
+          syntax_error: "[%{service_class_name}] Синтаксическая ошибка внутри `%{code}` ресурса `%{input_name}`: %{exception_message}"
           dynamic_options:
             consists_of:
-              required: "[%{service_class_name}] Отсутствует обязательный элемент в коллекции инпута `%{input_name}`"
-              wrong_type: "[%{service_class_name}] Неправильный тип коллекции инпута `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
-              wrong_element_type: "[%{service_class_name}] Неправильный тип элемента в коллекции инпута `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+              required: "[%{service_class_name}] Отсутствует обязательный элемент в коллекции ресурса `%{input_name}`"
+              wrong_type: "[%{service_class_name}] Неправильный тип коллекции ресурса `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Неправильный тип элемента в коллекции ресурса `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
             format:
-              default: "[%{service_class_name}] Инпут `%{input_name}` не соответствует формату `%{format_name}`"
-              wrong_pattern: "[%{service_class_name}] Инпут `%{input_name}` не соответствует формату `%{format_name}`"
-              unknown: "[%{service_class_name}] Указан неизвестный формат `%{format_name}` у инпута `%{input_name}`"
+              default: "[%{service_class_name}] Ресурс `%{input_name}` не соответствует формату `%{format_name}`"
+              wrong_pattern: "[%{service_class_name}] Ресурс `%{input_name}` не соответствует формату `%{format_name}`"
+              unknown: "[%{service_class_name}] Указан неизвестный формат `%{format_name}` у ресурса `%{input_name}`"
             min:
-              default: "[%{service_class_name}] Инпут `%{input_name}` получил значение `%{value}`, которое меньше `%{option_value}`"
+              default: "[%{service_class_name}] Ресурс `%{input_name}` получил значение `%{value}`, которое меньше `%{option_value}`"
             max:
-              default: "[%{service_class_name}] Инпут `%{input_name}` получил значение `%{value}`, которое больше `%{option_value}`"
+              default: "[%{service_class_name}] Ресурс `%{input_name}` получил значение `%{value}`, которое больше `%{option_value}`"
         required:
           default_error:
-            default: "[%{service_class_name}] Обязательный инпут `%{input_name}` отсутствует"
+            default: "[%{service_class_name}] Обязательный ресурс `%{input_name}` отсутствует"
         type:
           default_error:
-            default: "[%{service_class_name}] Неправильный тип инпута `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
+            default: "[%{service_class_name}] Неправильный тип ресурса `%{input_name}`, ожидалось `%{expected_type}`, получено `%{given_type}`"
             for_hash:
-              wrong_element_type: "[%{service_class_name}] Неправильный тип в хеше инпута `%{input_name}`, для `%{key_name}` ожидалось `%{expected_type}`, получено `%{given_type}`"
+              wrong_element_type: "[%{service_class_name}] Неправильный тип в хеше ресурса `%{input_name}`, для `%{key_name}` ожидалось `%{expected_type}`, получено `%{given_type}`"
       tools:
         find_unnecessary:
           error: "[%{service_class_name}] Неожиданные атрибуты: `%{unnecessary_attributes}`"
         rules:
-          error: "[%{service_class_name}] Конфликт в опциях инпута `%{input_name}`: `%{conflict_code}`"
+          error: "[%{service_class_name}] Конфликт в опциях ресурса `%{input_name}`: `%{conflict_code}`"
     internals:
       undefined:
         getter: "[%{service_class_name}] Неизвестный внутренний атрибут `%{internal_name}`"
