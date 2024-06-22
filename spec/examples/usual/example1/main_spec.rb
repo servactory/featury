@@ -3,11 +3,12 @@
 RSpec.describe Usual::Example1::Main do
   let(:arguments) do
     {
-      record: Usual::Example1::Main::Record.new(id: "123"),
+      record: record,
       user: user
     }
   end
 
+  let(:record) { Usual::Example1::Main::Record.new(id: "123") }
   let(:user) { Usual::Example1::Main::User.new(id: "456") }
 
   describe "#enabled?" do
