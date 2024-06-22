@@ -5,7 +5,6 @@ module Featury
     module Workspace
       private
 
-      # rubocop:disable Metrics/MethodLength
       def call!(
         action:,
         incoming_arguments:,
@@ -15,8 +14,6 @@ module Featury
         collection_of_groups:,
         **
       )
-        puts ":: #{self.class.name} » Actions::Workspace » call!"
-
         service_result = Service::Builder.build_and_call!(
           context: self,
           action: action,
@@ -29,7 +26,6 @@ module Featury
 
         super && service_result.success? && service_result.all_true?
       end
-      # rubocop:enable Metrics/MethodLength
     end
   end
 end
