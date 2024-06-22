@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe Usual::Example1::Feature1 do
+RSpec.describe Usual::Example1::Main do
   let(:arguments) do
     {
-      record: Usual::Example1::Feature1::Record.new(id: "123"),
-      user: Usual::Example1::Feature1::User.new(id: "456")
+      record: Usual::Example1::Main::Record.new(id: "123"),
+      user: Usual::Example1::Main::User.new(id: "456")
     }
   end
 

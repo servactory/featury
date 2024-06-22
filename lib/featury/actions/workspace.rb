@@ -5,6 +5,7 @@ module Featury
     module Workspace
       private
 
+      # rubocop:disable Metrics/MethodLength
       def call!(
         action:,
         incoming_arguments:,
@@ -27,6 +28,7 @@ module Featury
             collection_of_groups
           ).result
       end
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
