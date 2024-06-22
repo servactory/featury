@@ -71,9 +71,6 @@ end
 
 ```ruby
 class BillingFeature < ApplicationFeature
-  # The user resource is currently needed due to availability and passing from the parent class.
-  resource :user, type: User
-
   prefix :billing
 
   features(
@@ -84,15 +81,27 @@ end
 
 ```ruby
 class PaymentSystemFeature < ApplicationFeature
-  # The user resource is currently needed due to availability and passing from the parent class.
-  resource :user, type: User
-
   prefix :payment_system
 
   features(
     :work # => :payment_system_work
   )
 end
+```
+
+The `resource` method can indicate how the transmitted information should be processed.
+In addition to the options that Servactory brings, there are options for specifying the processing mode of the transmitted data.
+
+If it is necessary for a resource to be transferred as an option for a feature flag, then use the `option` option:
+
+```ruby
+resource :user, type: User, option: true
+```
+
+If it is necessary for a resource to be transferred to a nested group, then use the `nested` option:
+
+```ruby
+resource :user, type: User, nested: true
 ```
 
 #### Working with the features of your project

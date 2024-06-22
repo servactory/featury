@@ -34,6 +34,7 @@ module Featury
           builder_class.call!(
             action: @action,
             **@incoming_arguments,
+            collection_of_resources: @collection_of_resources,
             collection_of_conditions: @collection_of_conditions,
             collection_of_features: @collection_of_features,
             collection_of_groups: @collection_of_groups

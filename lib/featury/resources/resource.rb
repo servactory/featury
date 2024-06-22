@@ -7,7 +7,19 @@ module Featury
 
       def initialize(name, **options)
         @name = name
+
+        @nested = options.delete(:nested) || false
+        @option = options.delete(:option) || false
+
         @options = options
+      end
+
+      def nested?
+        @nested
+      end
+
+      def option?
+        @option
       end
     end
   end

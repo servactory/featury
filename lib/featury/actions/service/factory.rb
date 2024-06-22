@@ -31,6 +31,7 @@ module Featury
 
             input :action, type: Featury::Actions::Action
 
+            input :collection_of_resources, type: Featury::Resources::Collection
             input :collection_of_conditions, type: Featury::Conditions::Collection
             input :collection_of_features, type: Featury::Features::Collection
             input :collection_of_groups, type: Featury::Groups::Collection
@@ -56,12 +57,17 @@ module Featury
             end
 
             def check_features
-              internals.features_are_true = inputs.action.block.call(features: inputs.collection_of_features.list)
+              options = inputs.collection_of_resources.only_option.to_h do |resource|
+                [resource.name, inputs.public_send(resource.name)]
+              end
+
+              internals.features_are_true =
+                inputs.action.block.call(features: inputs.collection_of_features.list, **options)
             end
 
             def check_groups
-              arguments = inputs.instance_variable_get(:@collection_of_inputs).names.to_h do |input_name|
-                [input_name, inputs.public_send(input_name)]
+              arguments = inputs.collection_of_resources.only_nested.to_h do |resource|
+                [resource.name, inputs.public_send(resource.name)]
               end
 
               internals.groups_are_true = inputs.collection_of_groups.all? do |group|

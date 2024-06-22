@@ -10,26 +10,12 @@ module Featury
         @collection = collection
       end
 
-      def names
-        map(&:name)
+      def only_nested
+        Collection.new(filter(&:nested?))
       end
 
-      def internal_names
-        map { |attribute| attribute.to.name }
-      end
-
-      def include_class_exist?
-        @include_class_exist ||= filter do |attribute| # rubocop:disable Performance/Count
-          include_class = attribute.to.include_class
-
-          next false if include_class.nil?
-
-          if [Set, Array].include?(include_class)
-            include_class.any? { |item| item <= Datory::Base }
-          else
-            include_class <= Datory::Base
-          end
-        end.size.positive?
+      def only_option
+        Collection.new(filter(&:option?))
       end
     end
   end
