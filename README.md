@@ -9,9 +9,9 @@ Featury is designed for grouping and managing multiple features in projects.
 You can use any ready-made solution or your own.
 Feature is easily customizable to suit projects and their goals.
 
-## Documentation
+[//]: # (## Documentation)
 
-See [featury.servactory.com](https://featury.servactory.com) for documentation.
+[//]: # (See [featury.servactory.com]&#40;https://featury.servactory.com&#41; for documentation.)
 
 ## Quick Start
 
