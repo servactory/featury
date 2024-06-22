@@ -6,7 +6,7 @@ module Featury
       private
 
       def call!(action:, **)
-        puts ":: Resources::Workspace » call!"
+        puts ":: #{self.class.name} » Resources::Workspace » call!"
 
         super
       end

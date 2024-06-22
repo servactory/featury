@@ -4,7 +4,7 @@ module Featury
   module Features
     module Workspace
       def call!(action:, **)
-        puts ":: Features::Workspace » call!"
+        puts ":: #{self.class.name} » Features::Workspace » call!"
 
         super
       end

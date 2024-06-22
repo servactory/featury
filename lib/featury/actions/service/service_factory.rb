@@ -70,11 +70,7 @@ module Featury
             end
 
             def result
-              # puts
-              # puts internals.features.inspect
-              # puts
-
-              outputs.result = internals.conditions && internals.features
+              outputs.result = internals.conditions && internals.features && internals.groups
             end
           end
         end

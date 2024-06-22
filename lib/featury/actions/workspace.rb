@@ -14,10 +14,9 @@ module Featury
         collection_of_groups:,
         **
       )
-        puts ":: Actions::Workspace » call!"
+        puts ":: #{self.class.name} » Actions::Workspace » call!"
 
         super &&
-          # Featury::Actions::Tools::Performer.perform!(self, action, collection_of_features) &&
           Service::ServiceBuilder.build_and_call!(
             self,
             action,

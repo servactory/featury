@@ -4,9 +4,9 @@ module Featury
   module Conditions
     module Workspace
       def call!(collection_of_conditions:, **)
-        puts ":: Conditions::Workspace » call!"
+        puts ":: #{self.class.name} » Conditions::Workspace » call!"
 
-        super # && Featury::Conditions::Tools::Performer.perform!(self, collection_of_conditions)
+        super
       end
     end
   end
