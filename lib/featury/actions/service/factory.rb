@@ -21,7 +21,7 @@ module Featury
           @model_class.const_set(Builder::SERVICE_CLASS_NAME, class_sample)
         end
 
-        def create_service_class # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        def create_service_class # rubocop:disable Metrics/MethodLength, Metrics/AbcSize,Metrics/CyclomaticComplexity
           collection_of_resources = @collection_of_resources
 
           Class.new(Featury::Service::Builder) do
@@ -56,7 +56,7 @@ module Featury
               end
             end
 
-            def check_features
+            def check_features # rubocop:disable Metrics/AbcSize
               options = inputs.collection_of_resources.only_option.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
               end
@@ -65,7 +65,7 @@ module Featury
                 inputs.action.block.call(features: inputs.collection_of_features.list, **options)
             end
 
-            def check_groups
+            def check_groups # rubocop:disable Metrics/AbcSize
               arguments = inputs.collection_of_resources.only_nested.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
               end
