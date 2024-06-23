@@ -116,6 +116,17 @@ UserFeature::Onboarding.enable(user:) # => true
 UserFeature::Onboarding.disable(user:) # => false
 ```
 
+You can also use the `with` method to pass arguments if needed.
+
+```ruby
+feature = UserFeature::Onboarding.with(user:)
+
+feature.enabled? # => true
+feature.disabled? # => false
+feature.enable # => true
+feature.disable # => false
+```
+
 If one of the feature flags is turned off, for example,
 through your automation, then the main feature class will
 return `false` when asked "is it enabled?".
