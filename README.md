@@ -113,7 +113,7 @@ And the result of these calls will be based on the result of all feature flags.
 UserFeature::Onboarding.enabled?(user:) # => true
 UserFeature::Onboarding.disabled?(user:) # => false
 UserFeature::Onboarding.enable(user:) # => true
-UserFeature::Onboarding.disable(user:) # => false
+UserFeature::Onboarding.disable(user:) # => true
 ```
 
 You can also use the `with` method to pass arguments if needed.
@@ -124,7 +124,7 @@ feature = UserFeature::Onboarding.with(user:)
 feature.enabled? # => true
 feature.disabled? # => false
 feature.enable # => true
-feature.disable # => false
+feature.disable # => true
 ```
 
 If one of the feature flags is turned off, for example,
