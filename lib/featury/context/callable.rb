@@ -10,7 +10,7 @@ module Featury
 
         context = send(:new)
 
-        arguments.merge!(@additional_arguments) if @additional_arguments.is_a?(Hash)
+        arguments.merge!(@with_arguments) if @with_arguments.is_a?(Hash)
 
         _call!(context, action, **arguments)
       end
@@ -20,7 +20,7 @@ module Featury
       end
 
       def with(arguments = {})
-        @additional_arguments = arguments
+        @with_arguments = arguments
 
         self
       end
