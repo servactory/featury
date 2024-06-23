@@ -115,17 +115,17 @@ RSpec.describe Usual::Example1::Main do
         allow(FeatureLib).to receive(:disable).with(:example_1_e_iii).and_call_original
       end
 
-      it { expect(perform).to be(false) }
+      it { expect(perform).to be(true) }
 
-      it { expect(FeatureLib.disable(:example_1_a, user)).to be(false) }
-      it { expect(FeatureLib.disable(:example_1_b, user)).to be(false) }
-      it { expect(FeatureLib.disable(:example_1_c, user)).to be(false) }
-      it { expect(FeatureLib.disable(:example_1_d_i)).to be(false) }
-      it { expect(FeatureLib.disable(:example_1_d_ii)).to be(false) }
-      it { expect(FeatureLib.disable(:example_1_d_iii)).to be(false) }
-      it { expect(FeatureLib.disable(:example_1_e_i)).to be(false) }
-      it { expect(FeatureLib.disable(:example_1_e_ii)).to be(false) }
-      it { expect(FeatureLib.disable(:example_1_e_iii)).to be(false) }
+      it { expect(FeatureLib.disable(:example_1_a, user)).to be(true) }
+      it { expect(FeatureLib.disable(:example_1_b, user)).to be(true) }
+      it { expect(FeatureLib.disable(:example_1_c, user)).to be(true) }
+      it { expect(FeatureLib.disable(:example_1_d_i)).to be(true) }
+      it { expect(FeatureLib.disable(:example_1_d_ii)).to be(true) }
+      it { expect(FeatureLib.disable(:example_1_d_iii)).to be(true) }
+      it { expect(FeatureLib.disable(:example_1_e_i)).to be(true) }
+      it { expect(FeatureLib.disable(:example_1_e_ii)).to be(true) }
+      it { expect(FeatureLib.disable(:example_1_e_iii)).to be(true) }
     end
   end
 

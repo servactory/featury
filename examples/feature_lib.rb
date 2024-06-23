@@ -36,6 +36,6 @@ class FeatureLib
   end
 
   def disable(*_arguments)
-    @flag = false
+    !@flag = false
   end
 end
