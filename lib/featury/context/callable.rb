@@ -10,11 +10,19 @@ module Featury
 
         context = send(:new)
 
+        arguments.merge!(@additional_arguments) if @additional_arguments.is_a?(Hash)
+
         _call!(context, action, **arguments)
       end
 
       def respond_to_missing?(method_name, *)
         collection_of_actions.names.include?(method_name) || super
+      end
+
+      def with(arguments = {})
+        @additional_arguments = arguments
+
+        self
       end
 
       private
