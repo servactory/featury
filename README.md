@@ -3,11 +3,11 @@
   <a href="https://github.com/servactory/featury/releases"><img src="https://img.shields.io/github/release-date/servactory/featury" alt="Release Date"></a>
 </p>
 
-## For what?
+## Purpose
 
-Featury is designed for grouping and managing multiple features in projects.
-You can use any ready-made solution or your own.
-Feature is easily customizable to suit projects and their goals.
+Featury is designed to group and manage multiple features within a project.
+It provides the flexibility to utilize any pre-existing solution or create your own.
+It's easily adjustable to align with the unique needs and objectives of your project.
 
 [//]: # (## Documentation)
 
@@ -25,8 +25,8 @@ gem "featury"
 
 #### Basic class for your features
 
-For example, you use Flipper for features.
-In this case, the base class might look like this:
+For instance, assume that you are utilizing Flipper for managing features.
+In such scenario, the base class could potentially be structured as follows:
 
 ```ruby
 class ApplicationFeature < Featury::Base
@@ -89,16 +89,16 @@ class PaymentSystemFeature < ApplicationFeature
 end
 ```
 
-The `resource` method can indicate how the transmitted information should be processed.
-In addition to the options that Servactory brings, there are options for specifying the processing mode of the transmitted data.
+The `resource` method provides an indication of how the transmitted information ought to be processed.
+Besides the options provided by Servactory, additional ones are available for stipulating the processing mode of the transmitted data.
 
-If it is necessary for a resource to be transferred as an option for a feature flag, then use the `option` option:
+If a resource needs to be conveyed as a feature flag option, utilize the `option` parameter:
 
 ```ruby
 resource :user, type: User, option: true
 ```
 
-If it is necessary for a resource to be transferred to a nested group, then use the `nested` option:
+To transfer a resource to a nested group, utilize the `nested` option:
 
 ```ruby
 resource :user, type: User, nested: true
@@ -106,8 +106,8 @@ resource :user, type: User, nested: true
 
 #### Working with the features of your project
 
-Each of these actions will be applied to all feature flags.
-And the result of these calls will be based on the result of all feature flags.
+Each of these actions will be applied to every feature flag.
+Subsequently, the outcome of these actions will be contingent upon the combined results of all feature flags.
 
 ```ruby
 UserFeature::Onboarding.enabled?(user:) # => true
@@ -116,7 +116,7 @@ UserFeature::Onboarding.enable(user:) # => true
 UserFeature::Onboarding.disable(user:) # => true
 ```
 
-You can also use the `with` method to pass arguments if needed.
+You can also utilize the `with` method to pass necessary arguments.
 
 ```ruby
 feature = UserFeature::Onboarding.with(user:)
@@ -127,12 +127,13 @@ feature.enable # => true
 feature.disable # => true
 ```
 
-If one of the feature flags is turned off, for example,
-through your automation, then the main feature class will
-return `false` when asked "is it enabled?".
+If a feature flag is deactivated, possibly via automation processes,
+the primary feature class subsequently responds with `false` when
+queried about its enablement status.
 
-In the example above, this could be the payment system and its shutdown due to technical work.
-In this case, all onboarding of new users will be suspended.
+In the preceding example, there might be a scenario where the payment system is
+undergoing technical maintenance and therefore is temporarily shut down.
+Consequently, the onboarding process for new users will be halted until further notice.
 
 ## Contributing
 
