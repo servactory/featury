@@ -84,11 +84,11 @@ end
 ```
 
 The `resource` method provides an indication of how the transmitted information ought to be processed.
-Besides the options provided by Servactory, additional ones are available for stipulating the processing mode of the transmitted data.
+Besides the options provided by [Servactory](https://github.com/servactory/servactory), additional ones are available for stipulating the processing mode of the transmitted data.
 
 If a resource needs to be conveyed as a feature flag option, utilize the `option` parameter:
 
-```ruby
+```ruby 
 resource :user, type: User, option: true
 ```
 
