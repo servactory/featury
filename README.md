@@ -69,7 +69,8 @@ end
 class BillingFeature < ApplicationFeature
   prefix :billing
 
-  features :work # => :billing_work
+  features :api,        # => :billing_api
+           :webhooks    # => :billing_webhooks
 end
 ```
 
@@ -77,7 +78,8 @@ end
 class PaymentSystemFeature < ApplicationFeature
   prefix :payment_system
 
-  features :work # => :payment_system_work
+  features :api,      # => :payment_system_api
+           :webhooks  # => :payment_system_webhooks
 end
 ```
 
