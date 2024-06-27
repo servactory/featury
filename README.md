@@ -58,14 +58,10 @@ class UserFeature::Onboarding < ApplicationFeature
 
   prefix :user_onboarding
 
-  features(
-    :passage, # => :user_onboarding_passage
-  )
+  features :passage # => :user_onboarding_passage
 
-  groups(
-    BillingFeature,
-    PaymentSystemFeature
-  )
+  groups BillingFeature,
+         PaymentSystemFeature
 end
 ```
 
@@ -73,9 +69,7 @@ end
 class BillingFeature < ApplicationFeature
   prefix :billing
 
-  features(
-    :work # => :billing_work
-  )
+  features :work # => :billing_work
 end
 ```
 
@@ -83,9 +77,7 @@ end
 class PaymentSystemFeature < ApplicationFeature
   prefix :payment_system
 
-  features(
-    :work # => :payment_system_work
-  )
+  features :work # => :payment_system_work
 end
 ```
 
