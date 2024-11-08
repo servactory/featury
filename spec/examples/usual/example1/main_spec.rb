@@ -3,8 +3,8 @@
 RSpec.describe Usual::Example1::Main do
   let(:arguments) do
     {
-      record: record,
-      user: user
+      record:,
+      user:
     }
   end
 
