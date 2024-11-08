@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    featury (1.0.0.rc6)
+    featury (1.0.0.rc7)
       activesupport (>= 5.1, < 8.1)
       i18n (~> 1.14)
       servactory (>= 2.9.0)
