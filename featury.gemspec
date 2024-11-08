@@ -29,17 +29,14 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = Gem::Requirement.new(">= 3.1.0") # rubocop:disable Gemspec/RequiredRubyVersion
 
-  spec.add_dependency "activesupport", ">= 5.1", "< 8.0"
+  spec.add_dependency "activesupport", ">= 5.1", "< 8.1"
   spec.add_dependency "i18n", "~> 1.14"
-  spec.add_dependency "servactory", ">= 2.8.0"
+  spec.add_dependency "servactory", ">= 2.9.0"
   spec.add_dependency "zeitwerk", "~> 2.6"
 
   spec.add_development_dependency "appraisal", "~> 2.5"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rbs", ">= 3.1.3"
   spec.add_development_dependency "rspec", "~> 3.12"
-  spec.add_development_dependency "rubocop", "~> 1.57"
-  spec.add_development_dependency "rubocop-performance", "~> 1.19"
-  spec.add_development_dependency "rubocop-rake", "~> 0.6"
-  spec.add_development_dependency "rubocop-rspec", "~> 2.24"
+  spec.add_development_dependency "servactory-rubocop", ">= 0.5"
 end
