@@ -4,7 +4,7 @@ PATH
     featury (1.0.0.rc9)
       activesupport (>= 5.1, < 8.1)
       i18n (~> 1.14)
-      servactory (>= 2.9.0)
+      servactory (>= 2.11.0)
       zeitwerk (~> 2.6)
 
 GEM
