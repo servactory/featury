@@ -36,50 +36,46 @@ module Featury
             input :collection_of_features, type: Featury::Features::Collection
             input :collection_of_groups, type: Featury::Groups::Collection
 
-            internal :conditions_are_true, type: [TrueClass, FalseClass]
-            internal :features_are_true, type: [TrueClass, FalseClass]
-            internal :groups_are_true, type: [TrueClass, FalseClass]
-
             output :all_true, type: [TrueClass, FalseClass]
-
-            check :conditions
-            check :features
-            check :groups
 
             check :all
 
             private
 
-            def check_conditions
-              internals.conditions_are_true = inputs.collection_of_conditions.all? do |condition|
+            def check_all
+              outputs.all_true = conditions_are_true
+              return unless outputs.all_true
+
+              outputs.all_true = features_are_true
+              return unless outputs.all_true
+
+              outputs.all_true = groups_are_true
+            end
+
+            ####################################################################
+
+            def conditions_are_true
+              inputs.collection_of_conditions.all? do |condition|
                 condition.block.call(resources: inputs)
               end
             end
 
-            def check_features # rubocop:disable Metrics/AbcSize
+            def features_are_true
               options = inputs.collection_of_resources.only_option.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
               end
 
-              internals.features_are_true =
-                inputs.action.block.call(features: inputs.collection_of_features.list, **options)
+              inputs.action.block.call(features: inputs.collection_of_features.list, **options)
             end
 
-            def check_groups # rubocop:disable Metrics/AbcSize
+            def groups_are_true
               arguments = inputs.collection_of_resources.only_nested.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
               end
 
-              internals.groups_are_true = inputs.collection_of_groups.all? do |group|
+              inputs.collection_of_groups.all? do |group|
                 group.group.public_send(inputs.action.name, **arguments)
               end
-            end
-
-            def check_all
-              outputs.all_true =
-                internals.conditions_are_true &&
-                internals.features_are_true &&
-                internals.groups_are_true
             end
           end
         end
