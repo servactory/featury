@@ -4,7 +4,7 @@ PATH
     featury (1.0.0.rc10)
       activesupport (>= 5.1, < 8.1)
       i18n (~> 1.14)
-      servactory (>= 2.11.0)
+      servactory (>= 2.12)
       zeitwerk (~> 2.6)
 
 GEM
@@ -67,7 +67,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.2)
-    rubocop (1.72.2)
+    rubocop (1.73.1)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -78,7 +78,7 @@ GEM
       rubocop-ast (>= 1.38.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.38.0)
+    rubocop-ast (1.38.1)
       parser (>= 3.3.1.0)
     rubocop-factory_bot (2.26.1)
       rubocop (~> 1.61)
@@ -86,7 +86,7 @@ GEM
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1, < 2.0)
       rubocop-ast (>= 1.38.0, < 2.0)
-    rubocop-rails (2.30.1)
+    rubocop-rails (2.30.3)
       activesupport (>= 4.2.0)
       lint_roller (~> 1.1)
       rack (>= 1.1)
@@ -103,14 +103,15 @@ GEM
       rubocop-rspec (~> 3, >= 3.0.1)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
-    servactory (2.11.0)
+    servactory (2.12.0)
       activesupport (>= 5.1, < 8.1)
-      base64 (~> 0.2)
-      bigdecimal (~> 3.0)
-      i18n (~> 1.14)
-      mutex_m (~> 0.2)
-      zeitwerk (~> 2.6)
-    servactory-rubocop (0.6.1)
+      base64 (>= 0.2)
+      bigdecimal (>= 3.1)
+      i18n (>= 1.14)
+      mutex_m (>= 0.3)
+      zeitwerk (>= 2.6)
+    servactory-rubocop (0.7.0)
+      rubocop (>= 1.73)
       rubocop-factory_bot (>= 2.26)
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
@@ -123,7 +124,7 @@ GEM
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
-    uri (1.0.2)
+    uri (1.0.3)
     zeitwerk (2.7.2)
 
 PLATFORMS
@@ -145,7 +146,7 @@ DEPENDENCIES
   rake (~> 13.0)
   rbs (>= 3.1.3)
   rspec (~> 3.12)
-  servactory-rubocop (>= 0.5)
+  servactory-rubocop (>= 0.7)
 
 BUNDLED WITH
-   2.6.4
+   2.6.5
