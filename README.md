@@ -59,7 +59,7 @@ end
 #### Features of your project
 
 ```ruby
-class UserFeature::Onboarding < ApplicationFeature
+class User::OnboardingFeature < ApplicationFeature
   prefix :user_onboarding
 
   resource :user, type: User
@@ -112,16 +112,16 @@ Each of these actions will be applied to every feature flag.
 Subsequently, the outcome of these actions will be contingent upon the combined results of all feature flags.
 
 ```ruby
-UserFeature::Onboarding.enabled?(user:) # => true
-UserFeature::Onboarding.disabled?(user:) # => false
-UserFeature::Onboarding.enable(user:) # => true
-UserFeature::Onboarding.disable(user:) # => true
+User::OnboardingFeature.enabled?(user:) # => true
+User::OnboardingFeature.disabled?(user:) # => false
+User::OnboardingFeature.enable(user:) # => true
+User::OnboardingFeature.disable(user:) # => true
 ```
 
 You can also utilize the `with` method to pass necessary arguments.
 
 ```ruby
-feature = UserFeature::Onboarding.with(user:)
+feature = User::OnboardingFeature.with(user:)
 
 feature.enabled? # => true
 feature.disabled? # => false
