@@ -11,39 +11,6 @@ RSpec.describe Usual::Example1::Main do
   let(:record) { Usual::Example1::Main::Record.new(id: "123") }
   let(:user) { Usual::Example1::Main::User.new(id: "456") }
 
-  before do
-    allow(Services::Callback::Before).to(
-      receive(:call!)
-        .with(features: %i[usual_example_1_a usual_example_1_b usual_example_1_c])
-        .and_call_original
-    )
-    allow(Services::Callback::Before).to(
-      receive(:call!)
-        .with(features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii])
-        .and_call_original
-    )
-    allow(Services::Callback::Before).to(
-      receive(:call!)
-        .with(features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii])
-        .and_call_original
-    )
-    allow(Services::Callback::After).to(
-      receive(:call!)
-        .with(features: %i[usual_example_1_a usual_example_1_b usual_example_1_c])
-        .and_call_original
-    )
-    allow(Services::Callback::After).to(
-      receive(:call!)
-        .with(features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii])
-        .and_call_original
-    )
-    allow(Services::Callback::After).to(
-      receive(:call!)
-        .with(features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii])
-        .and_call_original
-    )
-  end
-
   shared_examples "expected behavior" do
     describe "#enabled?" do
       subject(:perform) { feature_class.enabled? }
@@ -59,6 +26,55 @@ RSpec.describe Usual::Example1::Main do
         allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_e_ii).and_call_original
         allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_e_ii).and_call_original
         allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_e_iii).and_call_original
+
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
+            .and_call_original
+        )
       end
 
       it { expect(perform).to be(true) }
@@ -78,7 +94,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_a usual_example_1_b usual_example_1_c])
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
             .exactly(1)
         )
       end
@@ -88,7 +107,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii])
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
             .exactly(1)
         )
       end
@@ -98,7 +120,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii])
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
             .exactly(1)
         )
       end
@@ -108,7 +133,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_a usual_example_1_b usual_example_1_c])
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
             .exactly(1)
         )
       end
@@ -118,7 +146,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii])
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
             .exactly(1)
         )
       end
@@ -128,7 +159,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii])
+            .with(
+              action: :enabled?,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
             .exactly(1)
         )
       end
@@ -148,6 +182,55 @@ RSpec.describe Usual::Example1::Main do
         allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_e_ii).and_call_original
         allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_e_ii).and_call_original
         allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_e_iii).and_call_original
+
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
+            .and_call_original
+        )
       end
 
       it { expect(perform).to be(false) }
@@ -167,7 +250,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_a usual_example_1_b usual_example_1_c])
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
             .exactly(1)
         )
       end
@@ -177,7 +263,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).not_to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii])
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
         )
       end
 
@@ -186,7 +275,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).not_to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii])
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
         )
       end
 
@@ -195,7 +287,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_a usual_example_1_b usual_example_1_c])
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
             .exactly(1)
         )
       end
@@ -205,7 +300,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).not_to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii])
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
         )
       end
 
@@ -214,7 +312,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).not_to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii])
+            .with(
+              action: :disabled?,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
         )
       end
     end
@@ -233,6 +334,55 @@ RSpec.describe Usual::Example1::Main do
         allow(FeatureLib).to receive(:enable).with(:usual_example_1_e_ii).and_call_original
         allow(FeatureLib).to receive(:enable).with(:usual_example_1_e_ii).and_call_original
         allow(FeatureLib).to receive(:enable).with(:usual_example_1_e_iii).and_call_original
+
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
+            .and_call_original
+        )
       end
 
       it { expect(perform).to be(true) }
@@ -252,7 +402,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_a usual_example_1_b usual_example_1_c])
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
             .exactly(1)
         )
       end
@@ -262,7 +415,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii])
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
             .exactly(1)
         )
       end
@@ -272,7 +428,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii])
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
             .exactly(1)
         )
       end
@@ -282,7 +441,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_a usual_example_1_b usual_example_1_c])
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
             .exactly(1)
         )
       end
@@ -292,7 +454,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii])
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
             .exactly(1)
         )
       end
@@ -302,7 +467,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii])
+            .with(
+              action: :enable,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
             .exactly(1)
         )
       end
@@ -322,6 +490,55 @@ RSpec.describe Usual::Example1::Main do
         allow(FeatureLib).to receive(:disable).with(:usual_example_1_e_ii).and_call_original
         allow(FeatureLib).to receive(:disable).with(:usual_example_1_e_ii).and_call_original
         allow(FeatureLib).to receive(:disable).with(:usual_example_1_e_iii).and_call_original
+
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::Before).to(
+          receive(:call!)
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
+            .and_call_original
+        )
+        allow(Services::Callback::After).to(
+          receive(:call!)
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
+            .and_call_original
+        )
       end
 
       it { expect(perform).to be(true) }
@@ -341,7 +558,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_a usual_example_1_b usual_example_1_c])
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
             .exactly(1)
         )
       end
@@ -351,7 +571,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii])
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
             .exactly(1)
         )
       end
@@ -361,7 +584,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::Before).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii])
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
             .exactly(1)
         )
       end
@@ -371,7 +597,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_a usual_example_1_b usual_example_1_c])
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
+            )
             .exactly(1)
         )
       end
@@ -381,7 +610,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii])
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
+            )
             .exactly(1)
         )
       end
@@ -391,7 +623,10 @@ RSpec.describe Usual::Example1::Main do
 
         expect(Services::Callback::After).to(
           have_received(:call!)
-            .with(features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii])
+            .with(
+              action: :disable,
+              features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
+            )
             .exactly(1)
         )
       end

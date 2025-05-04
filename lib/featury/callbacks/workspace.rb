@@ -5,8 +5,9 @@ module Featury
     module Workspace
       private
 
-      def call!(collection_of_callbacks:, collection_of_features:, **)
+      def call!(action:, collection_of_callbacks:, collection_of_features:, **) # rubocop:disable Metrics/MethodLength
         Featury::Callbacks::Service.call!(
+          action: action.name,
           callbacks: collection_of_callbacks.before,
           features: collection_of_features.list
         )
@@ -14,6 +15,7 @@ module Featury
         result = super
 
         Featury::Callbacks::Service.call!(
+          action: action.name,
           callbacks: collection_of_callbacks.after,
           features: collection_of_features.list
         )

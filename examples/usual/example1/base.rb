@@ -19,12 +19,12 @@ module Usual
         features.all? { |feature| FeatureLib.disable(feature, *options.values) }
       end
 
-      before do |features:|
-        Services::Callback::Before.call!(features:)
+      before do |action:, features:|
+        Services::Callback::Before.call!(action:, features:)
       end
 
-      after do |features:|
-        Services::Callback::After.call!(features:)
+      after do |action:, features:|
+        Services::Callback::After.call!(action:, features:)
       end
     end
   end

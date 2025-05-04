@@ -20,14 +20,14 @@ module Featury
         def before
           collection_of_callbacks << Callback.new(
             :before,
-            block: ->(features:) { yield(features:) }
+            block: ->(action:, features:) { yield(action:, features:) }
           )
         end
 
         def after
           collection_of_callbacks << Callback.new(
             :after,
-            block: ->(features:) { yield(features:) }
+            block: ->(action:, features:) { yield(action:, features:) }
           )
         end
 

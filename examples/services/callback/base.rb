@@ -8,7 +8,8 @@ module Services
         new(...).call!
       end
 
-      def initialize(features:)
+      def initialize(action:, features:)
+        @action = action
         @features = features
       end
 
