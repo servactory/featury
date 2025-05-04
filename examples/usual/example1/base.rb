@@ -20,11 +20,11 @@ module Usual
       end
 
       before do |features:|
-        # TODO
+        Services::Callback::Before.call!(features:)
       end
 
       after do |features:|
-        # TODO
+        Services::Callback::After.call!(features:)
       end
     end
   end
