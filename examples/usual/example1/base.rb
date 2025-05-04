@@ -18,6 +18,14 @@ module Usual
       action :disable do |features:, **options|
         features.all? { |feature| FeatureLib.disable(feature, *options.values) }
       end
+
+      before do |features:|
+        # TODO
+      end
+
+      after do |features:|
+        # TODO
+      end
     end
   end
 end

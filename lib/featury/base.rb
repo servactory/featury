@@ -4,6 +4,7 @@ module Featury
   class Base
     include Context::DSL
     include Actions::DSL
+    include Callbacks::DSL
     include Groups::DSL
     include Features::DSL
     include Conditions::DSL

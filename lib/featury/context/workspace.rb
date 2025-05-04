@@ -7,6 +7,7 @@ module Featury
 
       attr_reader :action,
                   :incoming_arguments,
+                  :collection_of_callbacks,
                   :collection_of_conditions,
                   :collection_of_features,
                   :collection_of_groups
@@ -14,6 +15,7 @@ module Featury
       def _call!(
         action:,
         incoming_arguments:,
+        collection_of_callbacks:,
         collection_of_resources:,
         collection_of_conditions:,
         collection_of_features:,
@@ -22,6 +24,7 @@ module Featury
         call!(
           action:,
           incoming_arguments:,
+          collection_of_callbacks:,
           collection_of_resources:,
           collection_of_conditions:,
           collection_of_features:,
@@ -32,6 +35,7 @@ module Featury
       def call!(
         action:,
         incoming_arguments:,
+        collection_of_callbacks:,
         collection_of_resources:,
         collection_of_conditions:,
         collection_of_features:,
@@ -39,6 +43,7 @@ module Featury
       )
         @action = action
         @incoming_arguments = incoming_arguments
+        @collection_of_callbacks = collection_of_callbacks
         @collection_of_resources = collection_of_resources
         @collection_of_conditions = collection_of_conditions
         @collection_of_features = collection_of_features

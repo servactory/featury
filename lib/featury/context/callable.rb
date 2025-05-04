@@ -32,6 +32,7 @@ module Featury
           :_call!,
           action:,
           incoming_arguments: arguments.symbolize_keys,
+          collection_of_callbacks:,
           collection_of_resources:,
           collection_of_conditions:,
           collection_of_features:,
