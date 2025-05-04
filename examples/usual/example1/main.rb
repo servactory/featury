@@ -6,16 +6,16 @@ module Usual
       Record = Struct.new(:id, keyword_init: true)
       User = Struct.new(:id, keyword_init: true)
 
+      prefix :usual_example_1
+
       resource :record, type: Record, nested: true
       resource :user, type: User, option: true
 
       condition ->(resources:) { resources.record.id == "123" }
 
-      prefix :example_1
-
-      # full » :example_1_a
-      # full » :example_1_b
-      # full » :example_1_c
+      # full » :usual_example_1_a
+      # full » :usual_example_1_b
+      # full » :usual_example_1_c
       features(
         :a,
         :b,

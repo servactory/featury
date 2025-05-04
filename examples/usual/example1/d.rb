@@ -7,11 +7,9 @@ module Usual
 
       condition ->(resources:) { resources.record.id == "123" }
 
-      prefix :example_1_d
-
-      # full » :example_1_d_i
-      # full » :example_1_d_ii
-      # full » :example_1_d_iii
+      # full » :usual_example_1_d_i
+      # full » :usual_example_1_d_ii
+      # full » :usual_example_1_d_iii
       features(
         :i,
         :ii,

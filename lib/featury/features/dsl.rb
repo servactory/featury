@@ -17,13 +17,30 @@ module Featury
         private
 
         def prefix(prefix)
-          @prefix = prefix
+          self.feature_prefix = prefix
         end
 
         def features(*names)
           names.each do |name|
-            collection_of_features << Feature.new(@prefix, name)
+            collection_of_features << Feature.new(feature_prefix, name)
           end
+        end
+
+        def feature_prefix=(value)
+          @feature_prefix = value
+        end
+
+        def feature_prefix
+          @feature_prefix || default_feature_prefix
+        end
+
+        def default_feature_prefix
+          @default_feature_prefix ||=
+            name.underscore
+                .gsub(/([a-z])(\d+)/, '\1_\2')
+                .gsub(/(\d+)([a-z])/, '\1_\2')
+                .tr("/", "_")
+                .to_sym
         end
 
         def collection_of_features
