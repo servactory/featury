@@ -3,7 +3,7 @@
 module Usual
   module Example1
     class E < Usual::Example1::Base
-      prefix :usual_example_1_d
+      prefix :usual_example_1_e
 
       resource :record, type: Usual::Example1::Main::Record
 
