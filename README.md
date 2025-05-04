@@ -26,7 +26,7 @@ gem "featury"
 #### Basic class for your features
 
 For instance, assume that you are utilizing Flipper for managing features.
-In such scenario, the base class could potentially be structured as follows:
+In such a scenario, the base class could potentially be structured as follows:
 
 ```ruby
 class ApplicationFeature < Featury::Base
@@ -45,6 +45,14 @@ class ApplicationFeature < Featury::Base
   action :disable do |features:, **options|
     features.all? { |feature| Flipper.disable(feature, *options.values) }
   end
+
+  before do |action:, features:|
+    Slack::API::Notify.call!(action:, features:)
+  end
+
+  after do |action:, features:|
+    Slack::API::Notify.call!(action:, features:)
+  end
 end
 ```
 
@@ -52,11 +60,11 @@ end
 
 ```ruby
 class UserFeature::Onboarding < ApplicationFeature
+  prefix :user_onboarding
+
   resource :user, type: User
 
   condition ->(resources:) { resources.user.onboarding_awaiting? }
-
-  prefix :user_onboarding
 
   features :passage # => :user_onboarding_passage
 
