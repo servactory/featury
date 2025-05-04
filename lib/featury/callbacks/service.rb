@@ -7,14 +7,14 @@ module Featury
         new(...).call!
       end
 
-      def initialize(collection_of_callbacks:, collection_of_features:)
-        @collection_of_callbacks = collection_of_callbacks
-        @collection_of_features = collection_of_features
+      def initialize(callbacks:, features:)
+        @callbacks = callbacks
+        @features = features
       end
 
       def call!
-        @collection_of_callbacks.each do |callback|
-          callback.block.call(features: @collection_of_features)
+        @callbacks.each do |callback|
+          callback.block.call(features: @features)
         end
       end
     end
