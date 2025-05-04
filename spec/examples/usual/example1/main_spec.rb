@@ -132,12 +132,12 @@ RSpec.describe Usual::Example1::Main do
   context "when `with` method is used" do
     let(:feature_class) { described_class.with(**arguments) }
 
-    include_examples "expected behavior"
+    it_behaves_like "expected behavior"
   end
 
   context "when `with` method is not used" do
     let(:feature_class) { described_class }
 
-    include_examples "expected behavior"
+    it_behaves_like "expected behavior"
   end
 end
