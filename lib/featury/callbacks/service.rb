@@ -7,8 +7,7 @@ module Featury
         new(...).call!
       end
 
-      def initialize(context:, collection_of_callbacks:, collection_of_features:)
-        @context = context
+      def initialize(collection_of_callbacks:, collection_of_features:)
         @collection_of_callbacks = collection_of_callbacks
         @collection_of_features = collection_of_features
       end
