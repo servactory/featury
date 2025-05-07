@@ -14,7 +14,7 @@ module Featury
       end
 
       def call!
-        @callbacks.expected_actions(include: @action).each do |callback|
+        @callbacks.desired_actions(include: @action).each do |callback|
           callback.block.call(action: @action, features: @features)
         end
       end

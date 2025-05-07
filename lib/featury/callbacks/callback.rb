@@ -3,11 +3,11 @@
 module Featury
   module Callbacks
     class Callback
-      attr_reader :expected_actions, :block
+      attr_reader :desired_actions, :block
 
-      def initialize(stage, expected_actions:, block:)
+      def initialize(stage, desired_actions:, block:)
         @stage = stage.to_sym
-        @expected_actions = expected_actions
+        @desired_actions = desired_actions
         @block = block
       end
 

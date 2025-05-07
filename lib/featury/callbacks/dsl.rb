@@ -20,7 +20,7 @@ module Featury
         def before(*actions)
           collection_of_callbacks << Callback.new(
             :before,
-            expected_actions: actions,
+            desired_actions: actions,
             block: ->(**arguments) { yield(**arguments) }
           )
         end
@@ -28,7 +28,7 @@ module Featury
         def after(*actions)
           collection_of_callbacks << Callback.new(
             :after,
-            expected_actions: actions,
+            desired_actions: actions,
             block: ->(**arguments) { yield(**arguments) }
           )
         end
