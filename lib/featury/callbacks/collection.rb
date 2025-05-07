@@ -20,11 +20,11 @@ module Featury
       end
 
       def before
-        @before ||= Collection.new(filter(&:before?))
+        Collection.new(filter(&:before?))
       end
 
       def after
-        @after ||= Collection.new(filter(&:after?))
+        Collection.new(filter(&:after?))
       end
     end
   end
