@@ -30,19 +30,19 @@ In such a scenario, the base class could potentially be structured as follows:
 
 ```ruby
 class ApplicationFeature < Featury::Base
-  action :enabled? do |features:, **options|
+  action(:enabled?) do |features:, **options|
     features.all? { |feature| Flipper.enabled?(feature, *options.values) }
   end
 
-  action :disabled? do |features:, **options|
+  action(:disabled?) do |features:, **options|
     features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
   end
 
-  action :enable do |features:, **options|
+  action(:enable) do |features:, **options|
     features.all? { |feature| Flipper.enable(feature, *options.values) }
   end
 
-  action :disable do |features:, **options|
+  action(:disable) do |features:, **options|
     features.all? { |feature| Flipper.disable(feature, *options.values) }
   end
 
