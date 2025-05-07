@@ -5,7 +5,7 @@ module Featury
     class Callback
       attr_reader :desired_actions, :block
 
-      def initialize(stage, desired_actions:, block:)
+      def initialize(stage:, desired_actions:, block:)
         @stage = stage.to_sym
         @desired_actions = desired_actions
         @block = block
