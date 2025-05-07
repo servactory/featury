@@ -285,13 +285,12 @@ RSpec.describe Usual::Example1::Main do
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :disabled?,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
         )
       end
 
@@ -439,39 +438,36 @@ RSpec.describe Usual::Example1::Main do
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :enable,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
         )
       end
 
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :enable,
               features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
             )
-            .exactly(1)
         )
       end
 
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :enable,
               features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
             )
-            .exactly(1)
         )
       end
     end
@@ -595,39 +591,36 @@ RSpec.describe Usual::Example1::Main do
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :disable,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
         )
       end
 
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :disable,
               features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
             )
-            .exactly(1)
         )
       end
 
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :disable,
               features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
             )
-            .exactly(1)
         )
       end
     end

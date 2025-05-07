@@ -8,13 +8,13 @@ module Featury
       end
 
       def initialize(action:, callbacks:, features:)
-        @callbacks = callbacks
         @action = action
+        @callbacks = callbacks
         @features = features
       end
 
       def call!
-        @callbacks.each do |callback|
+        @callbacks.where(expected_action_name: @action).each do |callback|
           callback.block.call(action: @action, features: @features)
         end
       end

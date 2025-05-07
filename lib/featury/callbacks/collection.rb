@@ -10,6 +10,15 @@ module Featury
         @collection = collection
       end
 
+      def where(expected_action_name:)
+        Collection.new(
+          filter do |callback|
+            callback.expected_action_name == expected_action_name ||
+              callback.expected_action_name.nil?
+          end
+        )
+      end
+
       def before
         @before ||= Collection.new(filter(&:before?))
       end
