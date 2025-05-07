@@ -50,7 +50,7 @@ class ApplicationFeature < Featury::Base
     Slack::API::Notify.call!(action:, features:)
   end
 
-  after do |action:, features:|
+  after(:enabled?, :disabled?) do |action:, features:|
     Slack::API::Notify.call!(action:, features:)
   end
 end
