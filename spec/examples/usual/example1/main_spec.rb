@@ -98,7 +98,7 @@ RSpec.describe Usual::Example1::Main do
               action: :enabled?,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -111,7 +111,7 @@ RSpec.describe Usual::Example1::Main do
               action: :enabled?,
               features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -124,7 +124,7 @@ RSpec.describe Usual::Example1::Main do
               action: :enabled?,
               features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -137,7 +137,7 @@ RSpec.describe Usual::Example1::Main do
               action: :enabled?,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -150,7 +150,7 @@ RSpec.describe Usual::Example1::Main do
               action: :enabled?,
               features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -163,7 +163,7 @@ RSpec.describe Usual::Example1::Main do
               action: :enabled?,
               features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
             )
-            .exactly(1)
+            .once
         )
       end
     end
@@ -254,7 +254,7 @@ RSpec.describe Usual::Example1::Main do
               action: :disabled?,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -291,7 +291,7 @@ RSpec.describe Usual::Example1::Main do
               action: :disabled?,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -406,7 +406,7 @@ RSpec.describe Usual::Example1::Main do
               action: :enable,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -419,7 +419,7 @@ RSpec.describe Usual::Example1::Main do
               action: :enable,
               features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -432,46 +432,43 @@ RSpec.describe Usual::Example1::Main do
               action: :enable,
               features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
             )
-            .exactly(1)
+            .once
         )
       end
 
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :enable,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
         )
       end
 
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :enable,
               features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
             )
-            .exactly(1)
         )
       end
 
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :enable,
               features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
             )
-            .exactly(1)
         )
       end
     end
@@ -562,7 +559,7 @@ RSpec.describe Usual::Example1::Main do
               action: :disable,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -575,7 +572,7 @@ RSpec.describe Usual::Example1::Main do
               action: :disable,
               features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
             )
-            .exactly(1)
+            .once
         )
       end
 
@@ -588,46 +585,43 @@ RSpec.describe Usual::Example1::Main do
               action: :disable,
               features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
             )
-            .exactly(1)
+            .once
         )
       end
 
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :disable,
               features: %i[usual_example_1_a usual_example_1_b usual_example_1_c]
             )
-            .exactly(1)
         )
       end
 
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :disable,
               features: %i[usual_example_1_d_i usual_example_1_d_ii usual_example_1_d_iii]
             )
-            .exactly(1)
         )
       end
 
       it do
         perform
 
-        expect(Services::Callback::After).to(
+        expect(Services::Callback::After).not_to(
           have_received(:call!)
             .with(
               action: :disable,
               features: %i[usual_example_1_e_i usual_example_1_e_ii usual_example_1_e_iii]
             )
-            .exactly(1)
         )
       end
     end

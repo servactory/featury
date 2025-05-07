@@ -17,17 +17,19 @@ module Featury
 
         private
 
-        def before
+        def before(*actions)
           collection_of_callbacks << Callback.new(
-            :before,
-            block: ->(action:, features:) { yield(action:, features:) }
+            stage: :before,
+            desired_actions: actions,
+            block: ->(**arguments) { yield(**arguments) }
           )
         end
 
-        def after
+        def after(*actions)
           collection_of_callbacks << Callback.new(
-            :after,
-            block: ->(action:, features:) { yield(action:, features:) }
+            stage: :after,
+            desired_actions: actions,
+            block: ->(**arguments) { yield(**arguments) }
           )
         end
 

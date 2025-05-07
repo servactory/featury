@@ -10,12 +10,21 @@ module Featury
         @collection = collection
       end
 
+      def desired_actions(include:)
+        Collection.new(
+          filter do |callback|
+            callback.desired_actions.blank? ||
+              callback.desired_actions.include?(include)
+          end
+        )
+      end
+
       def before
-        @before ||= Collection.new(filter(&:before?))
+        Collection.new(filter(&:before?))
       end
 
       def after
-        @after ||= Collection.new(filter(&:after?))
+        Collection.new(filter(&:after?))
       end
     end
   end

@@ -23,7 +23,7 @@ module Usual
         Services::Callback::Before.call!(action:, features:)
       end
 
-      after do |action:, features:|
+      after(:enabled?, :disabled?) do |action:, features:|
         Services::Callback::After.call!(action:, features:)
       end
     end
