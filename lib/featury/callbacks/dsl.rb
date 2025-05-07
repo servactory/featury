@@ -17,18 +17,18 @@ module Featury
 
         private
 
-        def before(action = nil)
+        def before(*actions)
           collection_of_callbacks << Callback.new(
             :before,
-            expected_action_name: action,
+            expected_actions: actions,
             block: ->(**arguments) { yield(**arguments) }
           )
         end
 
-        def after(action = nil)
+        def after(*actions)
           collection_of_callbacks << Callback.new(
             :after,
-            expected_action_name: action,
+            expected_actions: actions,
             block: ->(**arguments) { yield(**arguments) }
           )
         end

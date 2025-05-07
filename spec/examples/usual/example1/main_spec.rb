@@ -285,7 +285,7 @@ RSpec.describe Usual::Example1::Main do
       it do
         perform
 
-        expect(Services::Callback::After).not_to(
+        expect(Services::Callback::After).to(
           have_received(:call!)
             .with(
               action: :disabled?,

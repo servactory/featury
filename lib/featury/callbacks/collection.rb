@@ -10,11 +10,11 @@ module Featury
         @collection = collection
       end
 
-      def where(expected_action_name:)
+      def expected_actions(include:)
         Collection.new(
           filter do |callback|
-            callback.expected_action_name == expected_action_name ||
-              callback.expected_action_name.nil?
+            callback.expected_actions.blank? ||
+              callback.expected_actions.include?(include)
           end
         )
       end
