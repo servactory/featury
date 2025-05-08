@@ -140,7 +140,13 @@ Consequently, the onboarding process for new users will be halted until further 
 #### Information about features
 
 ```ruby
-User::OnboardingFeature.info
+info = User::OnboardingFeature.info
+```
+
+```ruby
+info.features # Feature flags within one class.
+info.groups   # Feature groups within one class.
+info.tree     # Tree of feature flags starting from the current class.
 ```
 
 ## Contributing
