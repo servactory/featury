@@ -10,7 +10,8 @@ module Featury
       module ClassMethods
         def info
           Featury::Info::Result.new(
-            features: collection_of_features.map(&:full_name)
+            features: collection_of_features.map(&:full_name),
+            groups: collection_of_groups.map(&:group)
           )
         end
       end

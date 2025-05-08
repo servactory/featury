@@ -651,6 +651,10 @@ RSpec.describe Usual::Example1::Main do
         :usual_example_1_b,
         :usual_example_1_c
       )
+      expect(perform.groups).to contain_exactly(
+        Usual::Example1::D,
+        Usual::Example1::E
+      )
     end
   end
 end
