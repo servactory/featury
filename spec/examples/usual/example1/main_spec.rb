@@ -663,7 +663,9 @@ RSpec.describe Usual::Example1::Main do
 
     it do
       expect(perform.tree).to contain_exactly(
-        :usual_example_1_a, :usual_example_1_b, :usual_example_1_c,
+        :usual_example_1_a,
+        :usual_example_1_b,
+        :usual_example_1_c,
         contain_exactly(
           :usual_example_1_d_i,
           :usual_example_1_d_ii,
