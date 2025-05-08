@@ -11,7 +11,7 @@ module Featury
       end
 
       def list
-        @list ||= map { |feature| :"#{feature.prefix}_#{feature.name}" }
+        @list ||= map(&:full_name)
       end
     end
   end

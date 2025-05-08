@@ -638,4 +638,19 @@ RSpec.describe Usual::Example1::Main do
 
     it_behaves_like "expected behavior"
   end
+
+  describe "#info" do
+    subject(:perform) { feature_class.info }
+
+    let(:feature_class) { described_class }
+
+    it :aggregate_failures do
+      expect(perform).to be_instance_of(Featury::Info::Result)
+      expect(perform.features).to contain_exactly(
+        :usual_example_1_a,
+        :usual_example_1_b,
+        :usual_example_1_c
+      )
+    end
+  end
 end

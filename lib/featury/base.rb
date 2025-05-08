@@ -2,6 +2,7 @@
 
 module Featury
   class Base
+    include Info::DSL
     include Context::DSL
     include Actions::DSL
     include Callbacks::DSL
