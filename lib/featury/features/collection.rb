@@ -10,8 +10,8 @@ module Featury
         @collection = collection
       end
 
-      def list
-        @list ||= map(&:full_name)
+      def full_names
+        map(&:full_name)
       end
     end
   end

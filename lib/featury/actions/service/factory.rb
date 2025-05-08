@@ -65,7 +65,7 @@ module Featury
                 [resource.name, inputs.public_send(resource.name)]
               end
 
-              inputs.action.block.call(features: inputs.collection_of_features.list, **options)
+              inputs.action.block.call(features: inputs.collection_of_features.full_names, **options)
             end
 
             def groups_are_true
