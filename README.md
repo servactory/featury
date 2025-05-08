@@ -137,6 +137,12 @@ In the preceding example, there might be a scenario where the payment system is
 undergoing technical maintenance and therefore is temporarily shut down.
 Consequently, the onboarding process for new users will be halted until further notice.
 
+#### Information about features
+
+```ruby
+User::OnboardingFeature.info
+```
+
 ## Contributing
 
 This project is intended to be a safe, welcoming space for collaboration. 
