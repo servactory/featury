@@ -644,16 +644,36 @@ RSpec.describe Usual::Example1::Main do
 
     let(:feature_class) { described_class }
 
-    it :aggregate_failures do
-      expect(perform).to be_instance_of(Featury::Info::Result)
+    it { expect(perform).to(be_instance_of(Featury::Info::Result)) }
+
+    it do
       expect(perform.features).to contain_exactly(
         :usual_example_1_a,
         :usual_example_1_b,
         :usual_example_1_c
       )
+    end
+
+    it do
       expect(perform.groups).to contain_exactly(
         Usual::Example1::D,
         Usual::Example1::E
+      )
+    end
+
+    it do
+      expect(perform.tree).to contain_exactly(
+        :usual_example_1_a, :usual_example_1_b, :usual_example_1_c,
+        contain_exactly(
+          :usual_example_1_d_i,
+          :usual_example_1_d_ii,
+          :usual_example_1_d_iii
+        ),
+        contain_exactly(
+          :usual_example_1_e_i,
+          :usual_example_1_e_ii,
+          :usual_example_1_e_iii
+        )
       )
     end
   end

@@ -11,7 +11,12 @@ module Featury
         def info
           Featury::Info::Result.new(
             features: collection_of_features.map(&:full_name),
-            groups: collection_of_groups.map(&:group)
+            groups: collection_of_groups.map(&:group),
+            tree: collection_of_features.map(&:full_name).concat(
+              collection_of_groups.map do |group|
+                group.group.info.tree
+              end
+            )
           )
         end
       end
