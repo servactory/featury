@@ -2,7 +2,7 @@
 
 module Usual
   module Example1
-    class Main < Usual::Example1::Base
+    class MainFeature < Usual::Example1::Base
       Record = Struct.new(:id, keyword_init: true)
       User = Struct.new(:id, keyword_init: true)
 
@@ -23,8 +23,8 @@ module Usual
       )
 
       groups(
-        Usual::Example1::D,
-        Usual::Example1::E
+        Usual::Example1::DFeature,
+        Usual::Example1::EFeature
       )
     end
   end
