@@ -40,7 +40,7 @@ module Featury
                 .gsub(/([a-z])(\d+)/, '\1_\2')
                 .gsub(/(\d+)([a-z])/, '\1_\2')
                 .tr("/", "_")
-                .sub("_feature", "")
+                .delete_suffix("_feature")
                 .to_sym
         end
 
