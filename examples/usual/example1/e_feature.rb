@@ -2,10 +2,10 @@
 
 module Usual
   module Example1
-    class E < Usual::Example1::Base
+    class EFeature < Usual::Example1::Base
       prefix :usual_example_1_e
 
-      resource :record, type: Usual::Example1::Main::Record
+      resource :record, type: Usual::Example1::MainFeature::Record
 
       condition ->(resources:) { resources.record.id == "123" }
 

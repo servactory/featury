@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Usual::Example1::Main do
+RSpec.describe Usual::Example1::MainFeature do
   let(:arguments) do
     {
       record:,
@@ -8,8 +8,8 @@ RSpec.describe Usual::Example1::Main do
     }
   end
 
-  let(:record) { Usual::Example1::Main::Record.new(id: "123") }
-  let(:user) { Usual::Example1::Main::User.new(id: "456") }
+  let(:record) { Usual::Example1::MainFeature::Record.new(id: "123") }
+  let(:user) { Usual::Example1::MainFeature::User.new(id: "456") }
 
   shared_examples "expected behavior" do
     describe "#enabled?" do
@@ -656,8 +656,8 @@ RSpec.describe Usual::Example1::Main do
 
     it do
       expect(perform.groups).to contain_exactly(
-        Usual::Example1::D,
-        Usual::Example1::E
+        Usual::Example1::DFeature,
+        Usual::Example1::EFeature
       )
     end
 
