@@ -3,6 +3,9 @@
 module Usual
   module Example1
     class D < Usual::Example1::Base
+      # NOTE: No prefix is specified here. Default prefix used.
+      # prefix :usual_example_1_d
+
       resource :record, type: Usual::Example1::Main::Record
 
       condition ->(resources:) { resources.record.id == "123" }
