@@ -154,9 +154,9 @@ info = User::OnboardingFeature.info
 ```
 
 ```ruby
-info.features # Feature flags within one class.
-info.groups   # Feature groups within one class.
-info.tree     # Tree of feature flags starting from the current class.
+info.features # Feature flags of the current class.
+info.groups   # Feature flag groups of the current class.
+info.tree     # Tree of feature flags from the current class.
 ```
 
 ## Contributing
