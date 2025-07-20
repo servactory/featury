@@ -649,6 +649,27 @@ RSpec.describe Usual::Example1::MainFeature do
     it { expect(perform).to(be_instance_of(Featury::Info::Result)) }
 
     it do
+      expect(perform.actions.all).to contain_exactly(
+        :enabled?,
+        :disabled?,
+        :enable,
+        :disable,
+        :add
+      )
+    end
+
+    it do
+      expect(perform.actions.web.all).to contain_exactly(
+        :enabled?,
+        :disabled?,
+        :enable,
+        :disable
+      )
+    end
+
+    it { expect(perform.actions.web.main).to eq(:enabled?) }
+
+    it do
       expect(perform.features).to contain_exactly(
         :usual_example_1_a,
         :usual_example_1_b,

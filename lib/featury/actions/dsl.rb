@@ -17,9 +17,10 @@ module Featury
 
         private
 
-        def action(name)
+        def action(name, web: nil)
           collection_of_actions << Action.new(
             name,
+            web:,
             block: ->(features:, **options) { yield(features:, **options) }
           )
         end

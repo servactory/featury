@@ -3,11 +3,22 @@
 module Featury
   module Actions
     class Action
-      attr_reader :name, :block
+      attr_reader :name,
+                  :web,
+                  :block
 
-      def initialize(name, block:)
+      def initialize(name, web:, block:)
         @name = name
+        @web = web
         @block = block
+      end
+
+      def main_web?
+        @web == :main
+      end
+
+      def regular_web?
+        @web == :use
       end
     end
   end

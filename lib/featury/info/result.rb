@@ -3,9 +3,33 @@
 module Featury
   module Info
     class Result
-      attr_reader :features, :groups, :tree
+      class Actions
+        class Web
+          attr_reader :all,
+                      :main
 
-      def initialize(features:, groups:, tree:)
+          def initialize(collection_of_actions)
+            @all = collection_of_actions.names
+            @main = collection_of_actions.main_web.name
+          end
+        end
+
+        attr_reader :all,
+                    :web
+
+        def initialize(collection_of_actions)
+          @all = collection_of_actions.names
+          @web = Web.new(collection_of_actions.for_web)
+        end
+      end
+
+      attr_reader :actions,
+                  :features,
+                  :groups,
+                  :tree
+
+      def initialize(actions:, features:, groups:, tree:)
+        @actions = actions
         @features = features
         @groups = groups
         @tree = tree

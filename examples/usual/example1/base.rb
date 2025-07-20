@@ -3,20 +3,24 @@
 module Usual
   module Example1
     class Base < Featury::Base
-      action :enabled? do |features:, **options|
+      action :enabled?, web: :main do |features:, **options|
         features.all? { |feature| FeatureLib.enabled?(feature, *options.values) }
       end
 
-      action :disabled? do |features:, **options|
+      action :disabled?, web: :use do |features:, **options|
         features.any? { |feature| FeatureLib.disabled?(feature, *options.values) }
       end
 
-      action :enable do |features:, **options|
+      action :enable, web: :use do |features:, **options|
         features.all? { |feature| FeatureLib.enable(feature, *options.values) }
       end
 
-      action :disable do |features:, **options|
+      action :disable, web: :use do |features:, **options|
         features.all? { |feature| FeatureLib.disable(feature, *options.values) }
+      end
+
+      action :add do |features:, **options|
+        features.all? { |feature| FeatureLib.add(feature, *options.values) }
       end
 
       before do |action:, features:|
