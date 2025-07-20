@@ -19,6 +19,11 @@ module Featury
             )
           )
         end
+
+        # API: Featury Web
+        def featury?
+          true
+        end
       end
     end
   end
