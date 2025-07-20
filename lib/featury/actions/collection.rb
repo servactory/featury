@@ -18,7 +18,7 @@ module Featury
         map(&:name)
       end
 
-      def main
+      def main_web
         find(&:main_web?)
       end
 

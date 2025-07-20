@@ -10,7 +10,7 @@ module Featury
 
           def initialize(collection_of_actions)
             @all = collection_of_actions.names
-            @main = collection_of_actions.main.name
+            @main = collection_of_actions.main_web.name
           end
         end
 
