@@ -10,7 +10,7 @@ module Featury
       module ClassMethods
         def info
           Featury::Info::Result.new(
-            actions: Featury::Info::Actions.new(collection_of_actions),
+            actions: Featury::Info::Result::Actions.new(collection_of_actions),
             features: collection_of_features.full_names,
             groups: collection_of_groups.map(&:group),
             tree: collection_of_features.full_names.concat(
