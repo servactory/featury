@@ -3,7 +3,7 @@
 module Usual
   module Example1
     class Base < Featury::Base
-      action :enabled?, web: :condition do |features:, **options|
+      action :enabled?, web: :enabled? do |features:, **options|
         features.all? { |feature| FeatureLib.enabled?(feature, *options.values) }
       end
 
@@ -11,11 +11,11 @@ module Usual
         features.any? { |feature| FeatureLib.disabled?(feature, *options.values) }
       end
 
-      action :enable, web: :action do |features:, **options|
+      action :enable, web: :enable do |features:, **options|
         features.all? { |feature| FeatureLib.enable(feature, *options.values) }
       end
 
-      action :disable, web: :regular do |features:, **options|
+      action :disable, web: :disable do |features:, **options|
         features.all? { |feature| FeatureLib.disable(feature, *options.values) }
       end
 

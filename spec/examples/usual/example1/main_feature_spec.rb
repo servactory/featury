@@ -667,8 +667,9 @@ RSpec.describe Usual::Example1::MainFeature do
       )
     end
 
-    it { expect(perform.actions.web.condition).to eq(:enabled?) }
-    it { expect(perform.actions.web.action).to eq(:enable) }
+    it { expect(perform.actions.web.enabled).to eq(:enabled?) }
+    it { expect(perform.actions.web.enable).to eq(:enable) }
+    it { expect(perform.actions.web.disable).to eq(:disable) }
 
     it do
       expect(perform.features).to contain_exactly(
