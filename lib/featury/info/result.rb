@@ -3,9 +3,13 @@
 module Featury
   module Info
     class Result
-      attr_reader :features, :groups, :tree
+      attr_reader :actions,
+                  :features,
+                  :groups,
+                  :tree
 
-      def initialize(features:, groups:, tree:)
+      def initialize(actions:, features:, groups:, tree:)
+        @actions = actions
         @features = features
         @groups = groups
         @tree = tree
