@@ -11,7 +11,7 @@ module Featury
       end
 
       def for_web
-        Collection.new(filter(&:web?))
+        Collection.new(filter { |action| action.main? || action.web? })
       end
 
       def names

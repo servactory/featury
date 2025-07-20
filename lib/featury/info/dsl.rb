@@ -8,7 +8,7 @@ module Featury
       end
 
       module ClassMethods
-        def info
+        def info # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
           Featury::Info::Result.new(
             actions: Featury::Info::Actions.new(
               all: collection_of_actions.for_web.names,
