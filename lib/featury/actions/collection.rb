@@ -11,15 +11,30 @@ module Featury
       end
 
       def for_web
-        Collection.new(filter { |action| action.main_web? || action.regular_web? })
+        Collection.new(
+          filter do |action|
+            action.web_enabled? ||
+              action.web_enable? ||
+              action.web_disable? ||
+              action.web_regular?
+          end
+        )
       end
 
       def names
         map(&:name)
       end
 
-      def main_web
-        find(&:main_web?)
+      def web_enabled
+        find(&:web_enabled?)
+      end
+
+      def web_enable
+        find(&:web_enable?)
+      end
+
+      def web_disable
+        find(&:web_disable?)
       end
 
       def find_by(name:)

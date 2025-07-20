@@ -13,12 +13,20 @@ module Featury
         @block = block
       end
 
-      def main_web?
-        @web == :main
+      def web_enabled?
+        @web == :enabled?
       end
 
-      def regular_web?
-        @web == :use
+      def web_enable?
+        @web == :enable
+      end
+
+      def web_disable?
+        @web == :disable
+      end
+
+      def web_regular?
+        @web == :regular
       end
     end
   end
