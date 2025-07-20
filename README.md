@@ -158,7 +158,7 @@ info = User::OnboardingFeature.info
 ```
 
 ```ruby
-info.actions      # Feature actions (all, main) of the current class.
+info.actions      # Feature actions (all, web) of the current class.
 info.features     # Feature flags of the current class.
 info.groups       # Feature flag groups of the current class.
 info.tree         # Tree of feature flags from the current class.
