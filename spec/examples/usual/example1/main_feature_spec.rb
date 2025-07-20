@@ -653,11 +653,21 @@ RSpec.describe Usual::Example1::MainFeature do
         :enabled?,
         :disabled?,
         :enable,
+        :disable,
+        :add
+      )
+    end
+
+    it do
+      expect(perform.actions.web.all).to contain_exactly(
+        :enabled?,
+        :disabled?,
+        :enable,
         :disable
       )
     end
 
-    it { expect(perform.actions.main).to eq(:enabled?) }
+    it { expect(perform.actions.web.main).to eq(:enabled?) }
 
     it do
       expect(perform.features).to contain_exactly(

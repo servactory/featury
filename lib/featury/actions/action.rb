@@ -13,11 +13,11 @@ module Featury
         @block = block
       end
 
-      def main?
+      def main_web?
         @web == :main
       end
 
-      def web?
+      def regular_web?
         @web == :use
       end
     end

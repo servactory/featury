@@ -11,7 +11,7 @@ module Featury
       end
 
       def for_web
-        Collection.new(filter { |action| action.main? || action.web? })
+        Collection.new(filter { |action| action.main_web? || action.regular_web? })
       end
 
       def names
@@ -19,7 +19,7 @@ module Featury
       end
 
       def main
-        find(&:main?)
+        find(&:main_web?)
       end
 
       def find_by(name:)

@@ -19,6 +19,10 @@ module Usual
         features.all? { |feature| FeatureLib.disable(feature, *options.values) }
       end
 
+      action :add do |features:, **options|
+        features.all? { |feature| FeatureLib.add(feature, *options.values) }
+      end
+
       before do |action:, features:|
         Services::Callback::Before.call!(action:, features:)
       end

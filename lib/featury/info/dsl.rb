@@ -8,12 +8,9 @@ module Featury
       end
 
       module ClassMethods
-        def info # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        def info
           Featury::Info::Result.new(
-            actions: Featury::Info::Actions.new(
-              all: collection_of_actions.for_web.names,
-              main: collection_of_actions.main.name
-            ),
+            actions: Featury::Info::Actions.new(collection_of_actions),
             features: collection_of_features.full_names,
             groups: collection_of_groups.map(&:group),
             tree: collection_of_features.full_names.concat(
