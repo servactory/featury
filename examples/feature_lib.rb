@@ -35,7 +35,7 @@ class FeatureLib
     @flag = true
   end
 
-  def disable(*_arguments)
+  def disable(*_arguments) # rubocop:disable Naming/PredicateMethod
     @flag = false
 
     true
