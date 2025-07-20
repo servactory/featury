@@ -40,19 +40,19 @@ In such a scenario, the base class could potentially be structured as follows:
 
 ```ruby
 class ApplicationFeature < Featury::Base
-  action :enabled?, web: :main do |features:, **options|
+  action :enabled?, web: :enabled? do |features:, **options|
     features.all? { |feature| Flipper.enabled?(feature, *options.values) }
   end
 
-  action :disabled?, web: :use do |features:, **options|
+  action :disabled?, web: :regular do |features:, **options|
     features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
   end
 
-  action :enable, web: :use do |features:, **options|
+  action :enable, web: :enable do |features:, **options|
     features.all? { |feature| Flipper.enable(feature, *options.values) }
   end
 
-  action :disable, web: :use do |features:, **options|
+  action :disable, web: :disable do |features:, **options|
     features.all? { |feature| Flipper.disable(feature, *options.values) }
   end
 
@@ -69,6 +69,16 @@ class ApplicationFeature < Featury::Base
   end
 end
 ```
+
+#### About the `web:` key
+
+The `web:` key in the action definition allows you to specify which method will be used for web interactions. This is useful for mapping internal action names to external endpoints or UI actions. For example:
+
+- `enabled?` — the method that will be used in the web context to check the state of a feature flag;
+- `enable` — the method that will be used in the web context to enable a feature flag;
+- `disable` — the method that will be used in the web context to disable a feature flag.
+
+This mapping helps you clearly separate internal logic from the interface exposed to web clients.
 
 #### Features of your project
 
