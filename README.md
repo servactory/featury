@@ -40,20 +40,24 @@ In such a scenario, the base class could potentially be structured as follows:
 
 ```ruby
 class ApplicationFeature < Featury::Base
-  action :enabled? do |features:, **options|
+  action :enabled?, web: :main do |features:, **options|
     features.all? { |feature| Flipper.enabled?(feature, *options.values) }
   end
 
-  action :disabled? do |features:, **options|
+  action :disabled?, web: :use do |features:, **options|
     features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
   end
 
-  action :enable do |features:, **options|
+  action :enable, web: :use do |features:, **options|
     features.all? { |feature| Flipper.enable(feature, *options.values) }
   end
 
-  action :disable do |features:, **options|
+  action :disable, web: :use do |features:, **options|
     features.all? { |feature| Flipper.disable(feature, *options.values) }
+  end
+
+  action :add do |features:, **options|
+    features.all? { |feature| Flipper.add(feature, *options.values) }
   end
 
   before do |action:, features:|
@@ -154,9 +158,10 @@ info = User::OnboardingFeature.info
 ```
 
 ```ruby
-info.features # Feature flags of the current class.
-info.groups   # Feature flag groups of the current class.
-info.tree     # Tree of feature flags from the current class.
+info.actions      # Feature actions (all, main) of the current class.
+info.features     # Feature flags of the current class.
+info.groups       # Feature flag groups of the current class.
+info.tree         # Tree of feature flags from the current class.
 ```
 
 ## Contributing
