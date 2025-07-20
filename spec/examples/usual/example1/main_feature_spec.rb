@@ -644,6 +644,8 @@ RSpec.describe Usual::Example1::MainFeature do
 
     let(:feature_class) { described_class }
 
+    it { expect(feature_class.respond_to?(:info)).to be(true) }
+
     it { expect(perform).to(be_instance_of(Featury::Info::Result)) }
 
     it do
@@ -678,5 +680,9 @@ RSpec.describe Usual::Example1::MainFeature do
         )
       )
     end
+
+    it { expect(feature_class.respond_to?(:featury?)).to be(true) }
+
+    it { expect(feature_class.featury?).to be(true) }
   end
 end
