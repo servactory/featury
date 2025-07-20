@@ -6,11 +6,13 @@ module Featury
       class Actions
         class Web
           attr_reader :all,
-                      :main
+                      :condition,
+                      :action
 
           def initialize(collection_of_actions)
             @all = collection_of_actions.names
-            @main = collection_of_actions.main_web.name
+            @condition = collection_of_actions.condition_web.name
+            @action = collection_of_actions.action_web.name
           end
         end
 

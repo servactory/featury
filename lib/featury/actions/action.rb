@@ -13,12 +13,16 @@ module Featury
         @block = block
       end
 
-      def main_web?
-        @web == :main
+      def condition_web?
+        @web == :condition
+      end
+
+      def action_web?
+        @web == :action
       end
 
       def regular_web?
-        @web == :use
+        @web == :regular
       end
     end
   end
