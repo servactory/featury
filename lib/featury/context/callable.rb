@@ -12,7 +12,11 @@ module Featury
 
         arguments.merge!(@with_arguments) if @with_arguments.is_a?(Hash)
 
-        _call!(context, action, **arguments)
+        result = _call!(context, action, **arguments)
+
+        remove_instance_variable(:@with_arguments) if instance_variable_defined?(:@with_arguments)
+
+        result
       end
 
       def respond_to_missing?(method_name, *)

@@ -11,7 +11,7 @@ RSpec.describe Usual::Example1::MainFeature do
   let(:record) { Usual::Example1::MainFeature::Record.new(id: "123") }
   let(:user) { Usual::Example1::MainFeature::User.new(id: "456") }
 
-  shared_examples "expected behavior" do
+  shared_examples "expected successful behavior" do
     describe "#enabled?" do
       subject(:perform) { feature_class.enabled? }
 
@@ -79,15 +79,29 @@ RSpec.describe Usual::Example1::MainFeature do
 
       it { expect(perform).to be(true) }
 
-      it { expect(FeatureLib.enabled?(:usual_example_1_a, user)).to be(true) }
-      it { expect(FeatureLib.enabled?(:usual_example_1_b, user)).to be(true) }
-      it { expect(FeatureLib.enabled?(:usual_example_1_c, user)).to be(true) }
-      it { expect(FeatureLib.enabled?(:usual_example_1_d_i)).to be(true) }
-      it { expect(FeatureLib.enabled?(:usual_example_1_d_ii)).to be(true) }
-      it { expect(FeatureLib.enabled?(:usual_example_1_d_iii)).to be(true) }
-      it { expect(FeatureLib.enabled?(:usual_example_1_e_i)).to be(true) }
-      it { expect(FeatureLib.enabled?(:usual_example_1_e_ii)).to be(true) }
-      it { expect(FeatureLib.enabled?(:usual_example_1_e_iii)).to be(true) }
+      it :aggregate_failures do
+        perform
+
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_a, user).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_b, user).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_c, user).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_d_i).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_d_ii).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_d_iii).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_e_i).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_e_ii).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_e_iii).once
+      end
+
+      # it { expect(FeatureLib.enabled?(:usual_example_1_a, user)).to be(true) }
+      # it { expect(FeatureLib.enabled?(:usual_example_1_b, user)).to be(true) }
+      # it { expect(FeatureLib.enabled?(:usual_example_1_c, user)).to be(true) }
+      # it { expect(FeatureLib.enabled?(:usual_example_1_d_i)).to be(true) }
+      # it { expect(FeatureLib.enabled?(:usual_example_1_d_ii)).to be(true) }
+      # it { expect(FeatureLib.enabled?(:usual_example_1_d_iii)).to be(true) }
+      # it { expect(FeatureLib.enabled?(:usual_example_1_e_i)).to be(true) }
+      # it { expect(FeatureLib.enabled?(:usual_example_1_e_ii)).to be(true) }
+      # it { expect(FeatureLib.enabled?(:usual_example_1_e_iii)).to be(true) }
 
       it do
         perform
@@ -235,15 +249,29 @@ RSpec.describe Usual::Example1::MainFeature do
 
       it { expect(perform).to be(false) }
 
-      it { expect(FeatureLib.disabled?(:usual_example_1_a, user)).to be(false) }
-      it { expect(FeatureLib.disabled?(:usual_example_1_b, user)).to be(false) }
-      it { expect(FeatureLib.disabled?(:usual_example_1_c, user)).to be(false) }
-      it { expect(FeatureLib.disabled?(:usual_example_1_d_i)).to be(false) }
-      it { expect(FeatureLib.disabled?(:usual_example_1_d_ii)).to be(false) }
-      it { expect(FeatureLib.disabled?(:usual_example_1_d_iii)).to be(false) }
-      it { expect(FeatureLib.disabled?(:usual_example_1_e_i)).to be(false) }
-      it { expect(FeatureLib.disabled?(:usual_example_1_e_ii)).to be(false) }
-      it { expect(FeatureLib.disabled?(:usual_example_1_e_iii)).to be(false) }
+      it :aggregate_failures do
+        perform
+
+        expect(FeatureLib).to have_received(:disabled?).with(:usual_example_1_a, user).once
+        expect(FeatureLib).to have_received(:disabled?).with(:usual_example_1_b, user).once
+        expect(FeatureLib).to have_received(:disabled?).with(:usual_example_1_c, user).once
+        expect(FeatureLib).not_to have_received(:disabled?).with(:usual_example_1_d_i)
+        expect(FeatureLib).not_to have_received(:disabled?).with(:usual_example_1_d_ii)
+        expect(FeatureLib).not_to have_received(:disabled?).with(:usual_example_1_d_iii)
+        expect(FeatureLib).not_to have_received(:disabled?).with(:usual_example_1_e_i)
+        expect(FeatureLib).not_to have_received(:disabled?).with(:usual_example_1_e_ii)
+        expect(FeatureLib).not_to have_received(:disabled?).with(:usual_example_1_e_iii)
+      end
+
+      # it { expect(FeatureLib.disabled?(:usual_example_1_a, user)).to be(false) }
+      # it { expect(FeatureLib.disabled?(:usual_example_1_b, user)).to be(false) }
+      # it { expect(FeatureLib.disabled?(:usual_example_1_c, user)).to be(false) }
+      # it { expect(FeatureLib.disabled?(:usual_example_1_d_i)).to be(false) }
+      # it { expect(FeatureLib.disabled?(:usual_example_1_d_ii)).to be(false) }
+      # it { expect(FeatureLib.disabled?(:usual_example_1_d_iii)).to be(false) }
+      # it { expect(FeatureLib.disabled?(:usual_example_1_e_i)).to be(false) }
+      # it { expect(FeatureLib.disabled?(:usual_example_1_e_ii)).to be(false) }
+      # it { expect(FeatureLib.disabled?(:usual_example_1_e_iii)).to be(false) }
 
       it do
         perform
@@ -387,15 +415,29 @@ RSpec.describe Usual::Example1::MainFeature do
 
       it { expect(perform).to be(true) }
 
-      it { expect(FeatureLib.enable(:usual_example_1_a, user)).to be(true) }
-      it { expect(FeatureLib.enable(:usual_example_1_b, user)).to be(true) }
-      it { expect(FeatureLib.enable(:usual_example_1_c, user)).to be(true) }
-      it { expect(FeatureLib.enable(:usual_example_1_d_i)).to be(true) }
-      it { expect(FeatureLib.enable(:usual_example_1_d_ii)).to be(true) }
-      it { expect(FeatureLib.enable(:usual_example_1_d_iii)).to be(true) }
-      it { expect(FeatureLib.enable(:usual_example_1_e_i)).to be(true) }
-      it { expect(FeatureLib.enable(:usual_example_1_e_ii)).to be(true) }
-      it { expect(FeatureLib.enable(:usual_example_1_e_iii)).to be(true) }
+      it :aggregate_failures do
+        perform
+
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_a, user).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_b, user).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_c, user).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_d_i).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_d_ii).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_d_iii).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_e_i).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_e_ii).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_e_iii).once
+      end
+
+      # it { expect(FeatureLib.enable(:usual_example_1_a, user)).to be(true) }
+      # it { expect(FeatureLib.enable(:usual_example_1_b, user)).to be(true) }
+      # it { expect(FeatureLib.enable(:usual_example_1_c, user)).to be(true) }
+      # it { expect(FeatureLib.enable(:usual_example_1_d_i)).to be(true) }
+      # it { expect(FeatureLib.enable(:usual_example_1_d_ii)).to be(true) }
+      # it { expect(FeatureLib.enable(:usual_example_1_d_iii)).to be(true) }
+      # it { expect(FeatureLib.enable(:usual_example_1_e_i)).to be(true) }
+      # it { expect(FeatureLib.enable(:usual_example_1_e_ii)).to be(true) }
+      # it { expect(FeatureLib.enable(:usual_example_1_e_iii)).to be(true) }
 
       it do
         perform
@@ -540,15 +582,29 @@ RSpec.describe Usual::Example1::MainFeature do
 
       it { expect(perform).to be(true) }
 
-      it { expect(FeatureLib.disable(:usual_example_1_a, user)).to be(true) }
-      it { expect(FeatureLib.disable(:usual_example_1_b, user)).to be(true) }
-      it { expect(FeatureLib.disable(:usual_example_1_c, user)).to be(true) }
-      it { expect(FeatureLib.disable(:usual_example_1_d_i)).to be(true) }
-      it { expect(FeatureLib.disable(:usual_example_1_d_ii)).to be(true) }
-      it { expect(FeatureLib.disable(:usual_example_1_d_iii)).to be(true) }
-      it { expect(FeatureLib.disable(:usual_example_1_e_i)).to be(true) }
-      it { expect(FeatureLib.disable(:usual_example_1_e_ii)).to be(true) }
-      it { expect(FeatureLib.disable(:usual_example_1_e_iii)).to be(true) }
+      it :aggregate_failures do
+        perform
+
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_a, user).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_b, user).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_c, user).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_d_i).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_d_ii).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_d_iii).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_e_i).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_e_ii).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_e_iii).once
+      end
+
+      # it { expect(FeatureLib.disable(:usual_example_1_a, user)).to be(true) }
+      # it { expect(FeatureLib.disable(:usual_example_1_b, user)).to be(true) }
+      # it { expect(FeatureLib.disable(:usual_example_1_c, user)).to be(true) }
+      # it { expect(FeatureLib.disable(:usual_example_1_d_i)).to be(true) }
+      # it { expect(FeatureLib.disable(:usual_example_1_d_ii)).to be(true) }
+      # it { expect(FeatureLib.disable(:usual_example_1_d_iii)).to be(true) }
+      # it { expect(FeatureLib.disable(:usual_example_1_e_i)).to be(true) }
+      # it { expect(FeatureLib.disable(:usual_example_1_e_ii)).to be(true) }
+      # it { expect(FeatureLib.disable(:usual_example_1_e_iii)).to be(true) }
 
       it do
         perform
@@ -627,16 +683,62 @@ RSpec.describe Usual::Example1::MainFeature do
     end
   end
 
+  shared_examples "expected unsuccessful behavior" do
+    describe "#enabled?" do
+      subject(:perform) { feature_class.enabled? }
+
+      it do
+        expect { perform }.to raise_error(
+          Featury::Service::Exceptions::Input,
+          "[Usual::Example1::MainFeature::SBuilder] Required resource `record` is missing"
+        )
+      end
+    end
+
+    describe "#disabled?" do
+      subject(:perform) { feature_class.disabled? }
+
+      it do
+        expect { perform }.to raise_error(
+          Featury::Service::Exceptions::Input,
+          "[Usual::Example1::MainFeature::SBuilder] Required resource `record` is missing"
+        )
+      end
+    end
+
+    describe "#enable" do
+      subject(:perform) { feature_class.enable }
+
+      it do
+        expect { perform }.to raise_error(
+          Featury::Service::Exceptions::Input,
+          "[Usual::Example1::MainFeature::SBuilder] Required resource `record` is missing"
+        )
+      end
+    end
+
+    describe "#disable" do
+      subject(:perform) { feature_class.disable }
+
+      it do
+        expect { perform }.to raise_error(
+          Featury::Service::Exceptions::Input,
+          "[Usual::Example1::MainFeature::SBuilder] Required resource `record` is missing"
+        )
+      end
+    end
+  end
+
   context "when `with` method is used" do
     let(:feature_class) { described_class.with(**arguments) }
 
-    it_behaves_like "expected behavior"
+    it_behaves_like "expected successful behavior"
   end
 
   context "when `with` method is not used" do
     let(:feature_class) { described_class }
 
-    it_behaves_like "expected behavior"
+    it_behaves_like "expected unsuccessful behavior"
   end
 
   describe "#info" do
