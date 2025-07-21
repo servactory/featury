@@ -17,6 +17,10 @@ module Featury
       def only_option
         Collection.new(filter(&:option?))
       end
+
+      def names
+        map(&:name)
+      end
     end
   end
 end

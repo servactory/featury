@@ -672,6 +672,13 @@ RSpec.describe Usual::Example1::MainFeature do
     it { expect(perform.actions.web.disable).to eq(:disable) }
 
     it do
+      expect(perform.resources).to contain_exactly(
+        :record,
+        :user
+      )
+    end
+
+    it do
       expect(perform.features).to contain_exactly(
         :usual_example_1_a,
         :usual_example_1_b,

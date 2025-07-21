@@ -28,12 +28,14 @@ module Featury
       end
 
       attr_reader :actions,
+                  :resources,
                   :features,
                   :groups,
                   :tree
 
-      def initialize(actions:, features:, groups:, tree:)
+      def initialize(actions:, resources:, features:, groups:, tree:)
         @actions = actions
+        @resources = resources
         @features = features
         @groups = groups
         @tree = tree
