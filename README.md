@@ -90,10 +90,10 @@ class User::OnboardingFeature < ApplicationFeature
 
   condition ->(resources:) { resources.user.onboarding_awaiting? }
 
-  features :passage # => :user_onboarding_passage
+  feature :passage, description: "User onboarding passage feature" # => :user_onboarding_passage
 
-  groups BillingFeature,
-         PaymentSystemFeature
+  group BillingFeature, description: "Billing functionality group"
+  group PaymentSystemFeature, description: "Payment system functionality group"
 end
 ```
 
@@ -101,8 +101,8 @@ end
 class BillingFeature < ApplicationFeature
   prefix :billing
 
-  features :api,        # => :billing_api
-           :webhooks    # => :billing_webhooks
+  feature :api, description: "Billing API feature"        # => :billing_api
+  feature :webhooks, description: "Billing webhooks feature"    # => :billing_webhooks
 end
 ```
 
@@ -110,8 +110,8 @@ end
 class PaymentSystemFeature < ApplicationFeature
   prefix :payment_system
 
-  features :api,      # => :payment_system_api
-           :webhooks  # => :payment_system_webhooks
+  feature :api, description: "Payment system API feature"      # => :payment_system_api
+  feature :webhooks, description: "Payment system webhooks feature"  # => :payment_system_webhooks
 end
 ```
 
@@ -161,6 +161,20 @@ In the preceding example, there might be a scenario where the payment system is
 undergoing technical maintenance and therefore is temporarily shut down.
 Consequently, the onboarding process for new users will be halted until further notice.
 
+#### Feature and Group descriptions
+
+When defining features and groups, you can provide descriptions to add more context about what they do:
+
+```ruby
+# Adding a feature with description
+feature :api, description: "External API integration"
+
+# Adding a group with description
+group PaymentSystemFeature, description: "Payment processing functionality"
+```
+
+These descriptions are preserved in the feature tree and can be accessed via the info method.
+
 #### Information about features
 
 ```ruby
@@ -168,11 +182,27 @@ info = User::OnboardingFeature.info
 ```
 
 ```ruby
-info.actions      # Feature actions (all, web) of the current class.
-info.resources    # Feature resources of the current class.
-info.features     # Feature flags of the current class.
-info.groups       # Feature flag groups of the current class.
-info.tree         # Tree of feature flags from the current class.
+# Feature actions information (all actions and web actions)
+info.actions.all          # All actions: [:enabled?, :disabled?, :enable, :disable, :add]
+info.actions.web.all      # Web actions: [:enabled?, :disabled?, :enable, :disable]
+
+# Access specific web actions by their web: option name
+info.actions.web.enabled  # Returns the method name (:enabled?) that was defined with `web: :enabled?`
+info.actions.web.enable   # Returns the method name (:enable) that was defined with `web: :enable`
+info.actions.web.disable  # Returns the method name (:disable) that was defined with `web: :disable`
+
+# Feature resources information
+info.resources            # Feature resources of the current class.
+
+# Feature flags information (with descriptions)
+info.features             # Feature flags of the current class with their names and descriptions.
+
+# Feature groups information (with descriptions)
+info.groups               # Feature groups of the current class with their class references and descriptions.
+
+# Complete feature tree (features and nested groups)
+info.tree.features        # Direct features of the current class.
+info.tree.groups          # Features from nested groups.
 ```
 
 ## Contributing
