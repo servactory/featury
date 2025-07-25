@@ -11,13 +11,13 @@ module Usual
       condition ->(resources:) { resources.record.id == "123" }
 
       # full » :usual_example_1_d_i
+      feature :i, description: "D I feature"
+
       # full » :usual_example_1_d_ii
+      feature :ii, description: "D II feature"
+
       # full » :usual_example_1_d_iii
-      features(
-        :i,
-        :ii,
-        :iii
-      )
+      feature :iii, description: "D III feature"
     end
   end
 end

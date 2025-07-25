@@ -8,17 +8,13 @@ module Featury
       end
 
       module ClassMethods
-        def info # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        def info
           Featury::Info::Result.new(
             actions: Featury::Info::Result::Actions.new(collection_of_actions),
-            resources: collection_of_resources.names,
-            features: collection_of_features.full_names,
-            groups: collection_of_groups.map(&:group),
-            tree: collection_of_features.full_names.concat(
-              collection_of_groups.map do |group|
-                group.group.info.tree
-              end
-            )
+            resources: Featury::Info::Result::Resources.new(collection_of_resources).all.names,
+            features: Featury::Info::Result::Features.new(collection_of_features).all,
+            groups: Featury::Info::Result::Groups.new(collection_of_groups).all,
+            tree: Featury::Info::Result::Tree.new(collection_of_features, collection_of_groups).all
           )
         end
 

@@ -781,34 +781,90 @@ RSpec.describe Usual::Example1::MainFeature do
     end
 
     it do
-      expect(perform.features).to contain_exactly(
-        :usual_example_1_a,
-        :usual_example_1_b,
-        :usual_example_1_c
+      expect(perform.features).to(
+        contain_exactly(
+          have_attributes(
+            name: :usual_example_1_a,
+            description: "A feature"
+          ),
+          have_attributes(
+            name: :usual_example_1_b,
+            description: "B feature"
+          ),
+          have_attributes(
+            name: :usual_example_1_c,
+            description: "C feature"
+          )
+        )
       )
     end
 
     it do
-      expect(perform.groups).to contain_exactly(
-        Usual::Example1::DFeature,
-        Usual::Example1::EFeature
+      expect(perform.groups).to(
+        contain_exactly(
+          have_attributes(
+            group_class: Usual::Example1::DFeature,
+            description: "D feature group"
+          ),
+          have_attributes(
+            group_class: Usual::Example1::EFeature,
+            description: "E feature group"
+          )
+        )
       )
     end
 
-    it do
-      expect(perform.tree).to contain_exactly(
-        :usual_example_1_a,
-        :usual_example_1_b,
-        :usual_example_1_c,
-        contain_exactly(
-          :usual_example_1_d_i,
-          :usual_example_1_d_ii,
-          :usual_example_1_d_iii
-        ),
-        contain_exactly(
-          :usual_example_1_e_i,
-          :usual_example_1_e_ii,
-          :usual_example_1_e_iii
+    it do # rubocop:disable RSpec/ExampleLength
+      expect(perform.tree).to(
+        have_attributes(
+          features: contain_exactly(
+            have_attributes(
+              name: :usual_example_1_a,
+              description: "A feature"
+            ),
+            have_attributes(
+              name: :usual_example_1_b,
+              description: "B feature"
+            ),
+            have_attributes(
+              name: :usual_example_1_c,
+              description: "C feature"
+            )
+          ),
+          groups: contain_exactly(
+            have_attributes(
+              features: contain_exactly(
+                have_attributes(
+                  name: :usual_example_1_d_i,
+                  description: "D I feature"
+                ),
+                have_attributes(
+                  name: :usual_example_1_d_ii,
+                  description: "D II feature"
+                ),
+                have_attributes(
+                  name: :usual_example_1_d_iii,
+                  description: "D III feature"
+                )
+              )
+            ),
+            have_attributes(
+              features: contain_exactly(
+                have_attributes(
+                  name: :usual_example_1_e_i,
+                  description: "E I feature"
+                ),
+                have_attributes(
+                  name: :usual_example_1_e_ii,
+                  description: "E II feature"
+                ),
+                have_attributes(
+                  name: :usual_example_1_e_iii,
+                  description: "E III feature"
+                )
+              )
+            )
+          )
         )
       )
     end

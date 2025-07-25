@@ -9,7 +9,7 @@ module Featury
         Featury::Callbacks::Service.call!(
           action: action.name,
           callbacks: collection_of_callbacks.before,
-          features: collection_of_features.full_names
+          features: collection_of_features.names
         )
 
         result = super
@@ -17,7 +17,7 @@ module Featury
         Featury::Callbacks::Service.call!(
           action: action.name,
           callbacks: collection_of_callbacks.after,
-          features: collection_of_features.full_names
+          features: collection_of_features.names
         )
 
         result
