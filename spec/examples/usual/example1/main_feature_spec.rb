@@ -750,28 +750,30 @@ RSpec.describe Usual::Example1::MainFeature do
 
     it { expect(perform).to(be_instance_of(Featury::Info::Result)) }
 
-    it do
-      expect(perform.actions.all).to contain_exactly(
-        :enabled?,
-        :disabled?,
-        :enable,
-        :disable,
-        :add
+    it do # rubocop:disable RSpec/ExampleLength
+      expect(perform.actions).to(
+        have_attributes(
+          all: contain_exactly(
+            :enabled?,
+            :disabled?,
+            :enable,
+            :disable,
+            :add
+          ),
+          web: have_attributes(
+            all: contain_exactly(
+              :enabled?,
+              :disabled?,
+              :enable,
+              :disable
+            ),
+            enabled: eq(:enabled?),
+            enable: eq(:enable),
+            disable: eq(:disable)
+          )
+        )
       )
     end
-
-    it do
-      expect(perform.actions.web.all).to contain_exactly(
-        :enabled?,
-        :disabled?,
-        :enable,
-        :disable
-      )
-    end
-
-    it { expect(perform.actions.web.enabled).to eq(:enabled?) }
-    it { expect(perform.actions.web.enable).to eq(:enable) }
-    it { expect(perform.actions.web.disable).to eq(:disable) }
 
     it do
       expect(perform.resources).to contain_exactly(
