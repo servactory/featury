@@ -3,13 +3,12 @@
 module Featury
   module Features
     class Feature
-      def initialize(prefix, name)
-        @prefix = prefix
-        @name = name
-      end
+      attr_reader :name,
+                  :description
 
-      def full_name
-        :"#{@prefix}_#{@name}"
+      def initialize(prefix:, name:, description:)
+        @name = :"#{prefix}_#{name}"
+        @description = description
       end
     end
   end

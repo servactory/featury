@@ -4,14 +4,14 @@ module Featury
   module Features
     class Collection
       extend Forwardable
-      def_delegators :@collection, :<<, :each, :map, :merge
+      def_delegators :@collection, :<<, :each, :map, :merge, :to_a
 
       def initialize(collection = Set.new)
         @collection = collection
       end
 
-      def full_names
-        map(&:full_name)
+      def names
+        map(&:name)
       end
     end
   end

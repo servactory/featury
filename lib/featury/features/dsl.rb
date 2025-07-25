@@ -20,10 +20,20 @@ module Featury
           self.feature_prefix = prefix
         end
 
+        # DEPRECATED: Need to use the `feature` method instead of `features`.
         def features(*names)
+          Kernel.warn "DEPRECATION WARNING: " \
+                      "Method `features` is deprecated; " \
+                      "use `feature` instead. " \
+                      "It will be removed in one of the next releases."
+
           names.each do |name|
-            collection_of_features << Feature.new(feature_prefix, name)
+            collection_of_features << Feature.new(prefix: feature_prefix, name:, description: nil)
           end
+        end
+
+        def feature(name, description: nil)
+          collection_of_features << Feature.new(prefix: feature_prefix, name:, description:)
         end
 
         def feature_prefix=(value)

@@ -14,18 +14,16 @@ module Usual
       condition ->(resources:) { resources.record.id == "123" }
 
       # full » :usual_example_1_a
-      # full » :usual_example_1_b
-      # full » :usual_example_1_c
-      features(
-        :a,
-        :b,
-        :c
-      )
+      feature :a, description: "A feature"
 
-      groups(
-        Usual::Example1::DFeature,
-        Usual::Example1::EFeature
-      )
+      # full » :usual_example_1_b
+      feature :b, description: "B feature"
+
+      # full » :usual_example_1_c
+      feature :c, description: "C feature"
+
+      group Usual::Example1::DFeature, description: "D feature group"
+      group Usual::Example1::EFeature, description: "E feature group"
     end
   end
 end
