@@ -31,10 +31,25 @@ module Featury
 
             input :action, type: Featury::Actions::Action
 
-            input :collection_of_resources, type: Featury::Resources::Collection
-            input :collection_of_conditions, type: Featury::Conditions::Collection
-            input :collection_of_features, type: Featury::Features::Collection
-            input :collection_of_groups, type: Featury::Groups::Collection
+            input :collection_of_resources,
+                  type: Featury::Resources::Collection,
+                  required: false,
+                  default: Featury::Resources::Collection.new
+
+            input :collection_of_conditions,
+                  type: Featury::Conditions::Collection,
+                  required: false,
+                  default: Featury::Conditions::Collection.new
+
+            input :collection_of_features,
+                  type: Featury::Features::Collection,
+                  required: false,
+                  default: Featury::Features::Collection.new
+
+            input :collection_of_groups,
+                  type: Featury::Groups::Collection,
+                  required: false,
+                  default: Featury::Groups::Collection.new
 
             output :all_true, type: [TrueClass, FalseClass]
 
