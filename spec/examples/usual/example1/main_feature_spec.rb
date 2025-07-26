@@ -765,7 +765,8 @@ RSpec.describe Usual::Example1::MainFeature do
               :enabled?,
               :disabled?,
               :enable,
-              :disable
+              :disable,
+              :add
             ),
             enabled: eq(:enabled?),
             enable: eq(:enable),

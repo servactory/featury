@@ -19,7 +19,7 @@ module Usual
         features.all? { |feature| FeatureLib.disable(feature, *options.values) }
       end
 
-      action :add do |features:, **options|
+      action :add, web: :regular do |features:, **options|
         features.all? { |feature| FeatureLib.add(feature, *options.values) }
       end
 
