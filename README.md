@@ -184,7 +184,7 @@ info = User::OnboardingFeature.info
 ```ruby
 # Feature actions information (all actions and web actions)
 info.actions.all          # All actions: [:enabled?, :disabled?, :enable, :disable, :add]
-info.actions.web.all      # Web actions: [:enabled?, :disabled?, :enable, :disable]
+info.actions.web.all      # Web actions: [:enabled?, :enable, :disable]
 
 # Access specific web actions by their web: option name
 info.actions.web.enabled  # Returns the method name (:enabled?) that was defined with `web: :enabled?`
