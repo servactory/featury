@@ -56,7 +56,7 @@ class ApplicationFeature < Featury::Base
     features.all? { |feature| Flipper.disable(feature, *options.values) }
   end
 
-  action :add do |features:, **options|
+  action :add, web: :regular do |features:, **options|
     features.all? { |feature| Flipper.add(feature, *options.values) }
   end
 
