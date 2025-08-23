@@ -5,7 +5,7 @@ module Featury
     MAJOR = 1
     MINOR = 0
     PATCH = 0
-    PRE = "rc24"
+    PRE = "rc25"
 
     STRING = [MAJOR, MINOR, PATCH, PRE].compact.join(".")
   end
