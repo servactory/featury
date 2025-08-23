@@ -4,6 +4,7 @@ module Featury
   module Actions
     class Collection
       extend Forwardable
+
       def_delegators :@collection, :<<, :filter, :each, :map, :merge, :find
 
       def initialize(collection = Set.new)
