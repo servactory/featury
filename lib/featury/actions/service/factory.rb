@@ -26,7 +26,7 @@ module Featury
 
           Class.new(Featury::Service::Builder) do
             collection_of_resources.each do |resource|
-              input resource.name, **resource.options
+              input resource.name, required: resource.required?, **resource.options
             end
 
             input :action, type: Featury::Actions::Action
@@ -76,7 +76,7 @@ module Featury
             end
 
             def features_are_true
-              options = inputs.collection_of_resources.only_option.to_h do |resource|
+              options = inputs.collection_of_resources.only_option.only_required.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
               end
 
@@ -84,7 +84,7 @@ module Featury
             end
 
             def groups_are_true
-              arguments = inputs.collection_of_resources.only_nested.to_h do |resource|
+              arguments = inputs.collection_of_resources.only_nested.only_required.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
               end
 

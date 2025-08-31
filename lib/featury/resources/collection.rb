@@ -19,6 +19,10 @@ module Featury
         Collection.new(filter(&:option?))
       end
 
+      def only_required
+        Collection.new(filter(&:required?))
+      end
+
       def names
         map(&:name)
       end

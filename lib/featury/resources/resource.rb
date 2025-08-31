@@ -10,6 +10,7 @@ module Featury
 
         @nested = options.delete(:nested) || false
         @option = options.delete(:option) || false
+        @required = options.delete(:required) { true }
 
         @options = options
       end
@@ -20,6 +21,10 @@ module Featury
 
       def option?
         @option
+      end
+
+      def required?
+        @required
       end
     end
   end

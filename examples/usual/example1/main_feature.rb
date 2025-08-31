@@ -10,6 +10,7 @@ module Usual
 
       resource :record, type: Record, nested: true
       resource :user, type: User, option: true
+      resource :thing, type: User, required: false, option: true
 
       condition ->(resources:) { resources.record.id == "123" }
 
