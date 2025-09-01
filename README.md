@@ -124,7 +124,7 @@ If a resource needs to be conveyed as a feature flag option, utilize the `option
 resource :user, type: User, option: true
 ```
 
-To call flag without passing resource utilize `required: false` parameter (e.g. to manage global state) 
+To call a feature without passing a resource, use the `required: false` option (e.g., for managing the global state of the feature).
 
 ```ruby 
 resource :user, type: User, option: true, required: false
