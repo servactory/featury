@@ -124,6 +124,12 @@ If a resource needs to be conveyed as a feature flag option, utilize the `option
 resource :user, type: User, option: true
 ```
 
+To call flag without passing resource utilize `required: false` parameter (e.g. to manage global state) 
+
+```ruby 
+resource :user, type: User, option: true, required: false
+```
+
 To transfer a resource to a nested group, utilize the `nested` option:
 
 ```ruby
