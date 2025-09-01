@@ -22,10 +22,6 @@ module Featury
       def option?
         @option
       end
-
-      def required?
-        @required
-      end
     end
   end
 end

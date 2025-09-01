@@ -11,7 +11,7 @@ RSpec.describe Usual::Example1::MainFeature do
 
   let(:record) { Usual::Example1::MainFeature::Record.new(id: "123") }
   let(:user) { Usual::Example1::MainFeature::User.new(id: "456") }
-  let(:thing) { Usual::Example1::MainFeature::User.new(id: "789") }
+  let(:thing) { Usual::Example1::MainFeature::Thing.new(id: "789") }
   
   let(:expected_resources_for_options) { [user, thing] }
 

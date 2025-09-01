@@ -76,17 +76,17 @@ module Featury
             end
 
             def features_are_true
-              options = inputs.collection_of_resources.only_option.only_required.to_h do |resource|
+              options = inputs.collection_of_resources.only_option.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
-              end
+              end.compact
 
               inputs.action.block.call(features: inputs.collection_of_features.names, **options)
             end
 
             def groups_are_true
-              arguments = inputs.collection_of_resources.only_nested.only_required.to_h do |resource|
+              arguments = inputs.collection_of_resources.only_nested.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
-              end
+              end.compact
 
               inputs.collection_of_groups.all? do |group|
                 group.group_class.public_send(inputs.action.name, **arguments)
