@@ -8,8 +8,8 @@ module Featury
       def initialize(name, **options)
         @name = name
 
-        @nested = options.delete(:nested) || false
-        @option = options.delete(:option) || false
+        @nested = options.delete(:nested) { false }
+        @option = options.delete(:option) { false }
         @required = options.delete(:required) { true }
 
         @options = options
