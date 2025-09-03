@@ -11,10 +11,10 @@ module Usual
 
       resource :record, type: Record, nested: true
       resource :user, type: User, option: true
-      resource :thing_a, type: Thing, option: true, required: false
-      resource :thing_b, type: Thing, nested: true, required: false
+      resource :thing, type: Thing, option: true, required: false
+      resource :comment, type: String, nested: true, required: false
 
-      condition ->(resources:) { resources.record.id == "111" }
+      condition ->(resources:) { resources.record.id == "123" }
 
       # full » :usual_example_1_a
       feature :a, description: "A feature"

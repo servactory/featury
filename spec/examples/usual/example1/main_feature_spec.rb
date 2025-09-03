@@ -5,17 +5,17 @@ RSpec.describe Usual::Example1::MainFeature do
     {
       record:,
       user:,
-      thing_a:,
-      thing_b:
+      thing:,
+      comment:
     }
   end
 
-  let(:record) { Usual::Example1::MainFeature::Record.new(id: "111") }
-  let(:user) { Usual::Example1::MainFeature::User.new(id: "222") }
-  let(:thing_a) { Usual::Example1::MainFeature::Thing.new(id: "333") }
-  let(:thing_b) { Usual::Example1::MainFeature::Thing.new(id: "444") }
+  let(:record) { Usual::Example1::MainFeature::Record.new(id: "123") }
+  let(:user) { Usual::Example1::MainFeature::User.new(id: "456") }
+  let(:thing) { Usual::Example1::MainFeature::Thing.new(id: "789") }
+  let(:comment) { "A comment" }
 
-  let(:expected_resources_for_options) { [user, thing_a] }
+  let(:expected_resources_for_options) { [user, thing] }
 
   shared_examples "expected successful behavior" do
     describe "#enabled?" do
@@ -726,6 +726,21 @@ RSpec.describe Usual::Example1::MainFeature do
 
       it_behaves_like "expected successful behavior"
     end
+
+    context "when optional resources passed with blank values" do
+      let(:arguments) do
+        {
+          record:,
+          user:,
+          thing: nil,
+          comment: ""
+        }
+      end
+
+      let(:expected_resources_for_options) { [user] }
+
+      it_behaves_like "expected successful behavior"
+    end
   end
 
   context "when `with` method is not used" do
@@ -773,8 +788,8 @@ RSpec.describe Usual::Example1::MainFeature do
       expect(perform.resources).to contain_exactly(
         :record,
         :user,
-        :thing_a,
-        :thing_b
+        :thing,
+        :comment
       )
     end
 
