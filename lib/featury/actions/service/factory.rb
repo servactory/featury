@@ -21,7 +21,7 @@ module Featury
           @model_class.const_set(Builder::SERVICE_CLASS_NAME, class_sample)
         end
 
-        def create_service_class # rubocop:disable Metrics/MethodLength,Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+        def create_service_class # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
           collection_of_resources = @collection_of_resources
 
           Class.new(Featury::Service::Builder) do
