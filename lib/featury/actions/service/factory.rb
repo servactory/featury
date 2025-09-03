@@ -83,7 +83,7 @@ module Featury
               inputs.action.block.call(features: inputs.collection_of_features.names, **options)
             end
 
-            def groups_are_true
+            def groups_are_true # rubocop:disable Metrics/AbcSize
               arguments = inputs.collection_of_resources.only_nested.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
               end.compact

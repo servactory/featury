@@ -5,24 +5,29 @@ RSpec.describe Usual::Example1::MainFeature do
     {
       record:,
       user:,
-      thing:
+      thing_a:,
+      thing_b:
     }
   end
 
-  let(:record) { Usual::Example1::MainFeature::Record.new(id: "123") }
-  let(:user) { Usual::Example1::MainFeature::User.new(id: "456") }
-  let(:thing) { Usual::Example1::MainFeature::Thing.new(id: "789") }
-  
-  let(:expected_resources_for_options) { [user, thing] }
+  let(:record) { Usual::Example1::MainFeature::Record.new(id: "111") }
+  let(:user) { Usual::Example1::MainFeature::User.new(id: "222") }
+  let(:thing_a) { Usual::Example1::MainFeature::Thing.new(id: "333") }
+  let(:thing_b) { Usual::Example1::MainFeature::Thing.new(id: "444") }
+
+  let(:expected_resources_for_options) { [user, thing_a] }
 
   shared_examples "expected successful behavior" do
     describe "#enabled?" do
       subject(:perform) { feature_class.enabled? }
 
       before do
-        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_a, *expected_resources_for_options).and_call_original
-        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_b, *expected_resources_for_options).and_call_original
-        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_c, *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_a,
+                                                     *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_b,
+                                                     *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_c,
+                                                     *expected_resources_for_options).and_call_original
         allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_d_i).and_call_original
         allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_d_ii).and_call_original
         allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_d_iii).and_call_original
@@ -180,9 +185,12 @@ RSpec.describe Usual::Example1::MainFeature do
       subject(:perform) { feature_class.disabled? }
 
       before do
-        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_a, *expected_resources_for_options).and_call_original
-        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_b, *expected_resources_for_options).and_call_original
-        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_c, *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_a,
+                                                      *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_b,
+                                                      *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_c,
+                                                      *expected_resources_for_options).and_call_original
         allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_d_i).and_call_original
         allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_d_ii).and_call_original
         allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_d_iii).and_call_original
@@ -336,11 +344,12 @@ RSpec.describe Usual::Example1::MainFeature do
       subject(:perform) { feature_class.enable }
 
       before do
-        puts expected_resources_for_options
-        puts "-"*100
-        allow(FeatureLib).to receive(:enable).with(:usual_example_1_a, *expected_resources_for_options).and_call_original
-        allow(FeatureLib).to receive(:enable).with(:usual_example_1_b, *expected_resources_for_options).and_call_original
-        allow(FeatureLib).to receive(:enable).with(:usual_example_1_c, *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:enable).with(:usual_example_1_a,
+                                                   *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:enable).with(:usual_example_1_b,
+                                                   *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:enable).with(:usual_example_1_c,
+                                                   *expected_resources_for_options).and_call_original
         allow(FeatureLib).to receive(:enable).with(:usual_example_1_d_i).and_call_original
         allow(FeatureLib).to receive(:enable).with(:usual_example_1_d_ii).and_call_original
         allow(FeatureLib).to receive(:enable).with(:usual_example_1_d_iii).and_call_original
@@ -495,9 +504,12 @@ RSpec.describe Usual::Example1::MainFeature do
       subject(:perform) { feature_class.disable }
 
       before do
-        allow(FeatureLib).to receive(:disable).with(:usual_example_1_a, *expected_resources_for_options).and_call_original
-        allow(FeatureLib).to receive(:disable).with(:usual_example_1_b, *expected_resources_for_options).and_call_original
-        allow(FeatureLib).to receive(:disable).with(:usual_example_1_c, *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:disable).with(:usual_example_1_a,
+                                                    *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:disable).with(:usual_example_1_b,
+                                                    *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:disable).with(:usual_example_1_c,
+                                                    *expected_resources_for_options).and_call_original
         allow(FeatureLib).to receive(:disable).with(:usual_example_1_d_i).and_call_original
         allow(FeatureLib).to receive(:disable).with(:usual_example_1_d_ii).and_call_original
         allow(FeatureLib).to receive(:disable).with(:usual_example_1_d_iii).and_call_original
@@ -698,9 +710,11 @@ RSpec.describe Usual::Example1::MainFeature do
   context "when `with` method is used" do
     let(:feature_class) { described_class.with(**arguments) }
 
-    it_behaves_like "expected successful behavior"
+    context "when optional resources are passed" do
+      it_behaves_like "expected successful behavior"
+    end
 
-    context "when non required resources not passed" do
+    context "when optional resources are not passed" do
       let(:arguments) do
         {
           record:,
@@ -759,7 +773,8 @@ RSpec.describe Usual::Example1::MainFeature do
       expect(perform.resources).to contain_exactly(
         :record,
         :user,
-        :thing
+        :thing_a,
+        :thing_b
       )
     end
 

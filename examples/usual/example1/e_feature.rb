@@ -6,8 +6,9 @@ module Usual
       prefix :usual_example_1_e
 
       resource :record, type: Usual::Example1::MainFeature::Record
+      resource :thing_b, type: Usual::Example1::MainFeature::Thing, required: false
 
-      condition ->(resources:) { resources.record.id == "123" }
+      condition ->(resources:) { resources.record.id == "111" }
 
       # full » :usual_example_1_e_i
       feature :i, description: "E I feature"
