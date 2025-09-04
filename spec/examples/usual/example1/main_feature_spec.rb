@@ -4,21 +4,30 @@ RSpec.describe Usual::Example1::MainFeature do
   let(:arguments) do
     {
       record:,
-      user:
+      user:,
+      thing:,
+      comment:
     }
   end
 
   let(:record) { Usual::Example1::MainFeature::Record.new(id: "123") }
   let(:user) { Usual::Example1::MainFeature::User.new(id: "456") }
+  let(:thing) { Usual::Example1::MainFeature::Thing.new(id: "789") }
+  let(:comment) { "A comment" }
+
+  let(:expected_resources_for_options) { [user, thing] }
 
   shared_examples "expected successful behavior" do
     describe "#enabled?" do
       subject(:perform) { feature_class.enabled? }
 
       before do
-        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_a, user).and_call_original
-        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_b, user).and_call_original
-        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_c, user).and_call_original
+        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_a,
+                                                     *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_b,
+                                                     *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_c,
+                                                     *expected_resources_for_options).and_call_original
         allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_d_i).and_call_original
         allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_d_ii).and_call_original
         allow(FeatureLib).to receive(:enabled?).with(:usual_example_1_d_iii).and_call_original
@@ -82,9 +91,9 @@ RSpec.describe Usual::Example1::MainFeature do
       it :aggregate_failures do
         perform
 
-        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_a, user).once
-        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_b, user).once
-        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_c, user).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_a, *expected_resources_for_options).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_b, *expected_resources_for_options).once
+        expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_c, *expected_resources_for_options).once
         expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_d_i).once
         expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_d_ii).once
         expect(FeatureLib).to have_received(:enabled?).with(:usual_example_1_d_iii).once
@@ -176,9 +185,12 @@ RSpec.describe Usual::Example1::MainFeature do
       subject(:perform) { feature_class.disabled? }
 
       before do
-        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_a, user).and_call_original
-        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_b, user).and_call_original
-        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_c, user).and_call_original
+        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_a,
+                                                      *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_b,
+                                                      *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_c,
+                                                      *expected_resources_for_options).and_call_original
         allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_d_i).and_call_original
         allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_d_ii).and_call_original
         allow(FeatureLib).to receive(:disabled?).with(:usual_example_1_d_iii).and_call_original
@@ -242,9 +254,9 @@ RSpec.describe Usual::Example1::MainFeature do
       it :aggregate_failures do
         perform
 
-        expect(FeatureLib).to have_received(:disabled?).with(:usual_example_1_a, user).once
-        expect(FeatureLib).to have_received(:disabled?).with(:usual_example_1_b, user).once
-        expect(FeatureLib).to have_received(:disabled?).with(:usual_example_1_c, user).once
+        expect(FeatureLib).to have_received(:disabled?).with(:usual_example_1_a, *expected_resources_for_options).once
+        expect(FeatureLib).to have_received(:disabled?).with(:usual_example_1_b, *expected_resources_for_options).once
+        expect(FeatureLib).to have_received(:disabled?).with(:usual_example_1_c, *expected_resources_for_options).once
         expect(FeatureLib).not_to have_received(:disabled?).with(:usual_example_1_d_i)
         expect(FeatureLib).not_to have_received(:disabled?).with(:usual_example_1_d_ii)
         expect(FeatureLib).not_to have_received(:disabled?).with(:usual_example_1_d_iii)
@@ -332,9 +344,12 @@ RSpec.describe Usual::Example1::MainFeature do
       subject(:perform) { feature_class.enable }
 
       before do
-        allow(FeatureLib).to receive(:enable).with(:usual_example_1_a, user).and_call_original
-        allow(FeatureLib).to receive(:enable).with(:usual_example_1_b, user).and_call_original
-        allow(FeatureLib).to receive(:enable).with(:usual_example_1_c, user).and_call_original
+        allow(FeatureLib).to receive(:enable).with(:usual_example_1_a,
+                                                   *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:enable).with(:usual_example_1_b,
+                                                   *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:enable).with(:usual_example_1_c,
+                                                   *expected_resources_for_options).and_call_original
         allow(FeatureLib).to receive(:enable).with(:usual_example_1_d_i).and_call_original
         allow(FeatureLib).to receive(:enable).with(:usual_example_1_d_ii).and_call_original
         allow(FeatureLib).to receive(:enable).with(:usual_example_1_d_iii).and_call_original
@@ -398,9 +413,9 @@ RSpec.describe Usual::Example1::MainFeature do
       it :aggregate_failures do
         perform
 
-        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_a, user).once
-        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_b, user).once
-        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_c, user).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_a, *expected_resources_for_options).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_b, *expected_resources_for_options).once
+        expect(FeatureLib).to have_received(:enable).with(:usual_example_1_c, *expected_resources_for_options).once
         expect(FeatureLib).to have_received(:enable).with(:usual_example_1_d_i).once
         expect(FeatureLib).to have_received(:enable).with(:usual_example_1_d_ii).once
         expect(FeatureLib).to have_received(:enable).with(:usual_example_1_d_iii).once
@@ -489,9 +504,12 @@ RSpec.describe Usual::Example1::MainFeature do
       subject(:perform) { feature_class.disable }
 
       before do
-        allow(FeatureLib).to receive(:disable).with(:usual_example_1_a, user).and_call_original
-        allow(FeatureLib).to receive(:disable).with(:usual_example_1_b, user).and_call_original
-        allow(FeatureLib).to receive(:disable).with(:usual_example_1_c, user).and_call_original
+        allow(FeatureLib).to receive(:disable).with(:usual_example_1_a,
+                                                    *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:disable).with(:usual_example_1_b,
+                                                    *expected_resources_for_options).and_call_original
+        allow(FeatureLib).to receive(:disable).with(:usual_example_1_c,
+                                                    *expected_resources_for_options).and_call_original
         allow(FeatureLib).to receive(:disable).with(:usual_example_1_d_i).and_call_original
         allow(FeatureLib).to receive(:disable).with(:usual_example_1_d_ii).and_call_original
         allow(FeatureLib).to receive(:disable).with(:usual_example_1_d_iii).and_call_original
@@ -555,9 +573,9 @@ RSpec.describe Usual::Example1::MainFeature do
       it :aggregate_failures do
         perform
 
-        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_a, user).once
-        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_b, user).once
-        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_c, user).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_a, *expected_resources_for_options).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_b, *expected_resources_for_options).once
+        expect(FeatureLib).to have_received(:disable).with(:usual_example_1_c, *expected_resources_for_options).once
         expect(FeatureLib).to have_received(:disable).with(:usual_example_1_d_i).once
         expect(FeatureLib).to have_received(:disable).with(:usual_example_1_d_ii).once
         expect(FeatureLib).to have_received(:disable).with(:usual_example_1_d_iii).once
@@ -692,7 +710,37 @@ RSpec.describe Usual::Example1::MainFeature do
   context "when `with` method is used" do
     let(:feature_class) { described_class.with(**arguments) }
 
-    it_behaves_like "expected successful behavior"
+    context "when optional resources are passed" do
+      it_behaves_like "expected successful behavior"
+    end
+
+    context "when optional resources are not passed" do
+      let(:arguments) do
+        {
+          record:,
+          user:
+        }
+      end
+
+      let(:expected_resources_for_options) { [user] }
+
+      it_behaves_like "expected successful behavior"
+    end
+
+    context "when optional resources passed with blank values" do
+      let(:arguments) do
+        {
+          record:,
+          user:,
+          thing: nil,
+          comment: ""
+        }
+      end
+
+      let(:expected_resources_for_options) { [user] }
+
+      it_behaves_like "expected successful behavior"
+    end
   end
 
   context "when `with` method is not used" do
@@ -739,7 +787,9 @@ RSpec.describe Usual::Example1::MainFeature do
     it do
       expect(perform.resources).to contain_exactly(
         :record,
-        :user
+        :user,
+        :thing,
+        :comment
       )
     end
 

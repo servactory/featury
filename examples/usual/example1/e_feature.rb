@@ -6,6 +6,7 @@ module Usual
       prefix :usual_example_1_e
 
       resource :record, type: Usual::Example1::MainFeature::Record
+      resource :comment, type: String, required: false
 
       condition ->(resources:) { resources.record.id == "123" }
 

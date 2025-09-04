@@ -21,12 +21,12 @@ module Featury
           @model_class.const_set(Builder::SERVICE_CLASS_NAME, class_sample)
         end
 
-        def create_service_class # rubocop:disable Metrics/MethodLength, Metrics/AbcSize,Metrics/CyclomaticComplexity
+        def create_service_class # rubocop:disable Metrics/MethodLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
           collection_of_resources = @collection_of_resources
 
           Class.new(Featury::Service::Builder) do
             collection_of_resources.each do |resource|
-              input resource.name, **resource.options
+              input resource.name, required: resource.required?, **resource.options
             end
 
             input :action, type: Featury::Actions::Action
@@ -75,18 +75,22 @@ module Featury
               end
             end
 
-            def features_are_true
+            def features_are_true # rubocop:disable Metrics/AbcSize
               options = inputs.collection_of_resources.only_option.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
               end
 
+              options = options.reject { |_, v| v.blank? }
+
               inputs.action.block.call(features: inputs.collection_of_features.names, **options)
             end
 
-            def groups_are_true
+            def groups_are_true # rubocop:disable Metrics/AbcSize
               arguments = inputs.collection_of_resources.only_nested.to_h do |resource|
                 [resource.name, inputs.public_send(resource.name)]
               end
+
+              arguments = arguments.reject { |_, v| v.blank? }
 
               inputs.collection_of_groups.all? do |group|
                 group.group_class.public_send(inputs.action.name, **arguments)
