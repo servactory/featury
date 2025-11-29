@@ -219,4 +219,4 @@ We recommend reading the [contributing guide](./CONTRIBUTING.md) as well.
 
 ## License
 
-Featury is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+Featury is available as open source under the terms of the [MIT License](./LICENSE).
