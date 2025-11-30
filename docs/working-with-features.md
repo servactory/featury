@@ -141,6 +141,22 @@ class ApplicationFeature < Featury::Base
   action :enabled?, web: :enabled? do |features:, **options|
     features.all? { |feature| Flipper.enabled?(feature, *options.values) }
   end
+
+  action :disabled?, web: :regular do |features:, **options|
+    features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
+  end
+
+  action :enable, web: :enable do |features:, **options|
+    features.all? { |feature| Flipper.enable(feature, *options.values) }
+  end
+
+  action :disable, web: :disable do |features:, **options|
+    features.all? { |feature| Flipper.disable(feature, *options.values) }
+  end
+
+  action :add, web: :regular do |features:, **options|
+    features.all? { |feature| Flipper.add(feature, *options.values) }
+  end
 end
 
 class User::OnboardingFeature < ApplicationFeature
@@ -161,8 +177,28 @@ User::OnboardingFeature.enabled?(user: user)
 
 ```ruby
 class ApplicationFeature < Featury::Base
+  action :enabled?, web: :enabled? do |features:, **options|
+    features.all? { |feature| Flipper.enabled?(feature, *options.values) }
+  end
+
+  action :disabled?, web: :regular do |features:, **options|
+    features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
+  end
+
   action :any_enabled?, web: :enabled? do |features:, **options|
     features.any? { |feature| Flipper.enabled?(feature, *options.values) }
+  end
+
+  action :enable, web: :enable do |features:, **options|
+    features.all? { |feature| Flipper.enable(feature, *options.values) }
+  end
+
+  action :disable, web: :disable do |features:, **options|
+    features.all? { |feature| Flipper.disable(feature, *options.values) }
+  end
+
+  action :add, web: :regular do |features:, **options|
+    features.all? { |feature| Flipper.add(feature, *options.values) }
   end
 end
 
@@ -174,8 +210,24 @@ User::OnboardingFeature.any_enabled?(user: user)
 
 ```ruby
 class ApplicationFeature < Featury::Base
+  action :enabled?, web: :enabled? do |features:, **options|
+    features.all? { |feature| Flipper.enabled?(feature, *options.values) }
+  end
+
   action :disabled?, web: :regular do |features:, **options|
     features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
+  end
+
+  action :enable, web: :enable do |features:, **options|
+    features.all? { |feature| Flipper.enable(feature, *options.values) }
+  end
+
+  action :disable, web: :disable do |features:, **options|
+    features.all? { |feature| Flipper.disable(feature, *options.values) }
+  end
+
+  action :add, web: :regular do |features:, **options|
+    features.all? { |feature| Flipper.add(feature, *options.values) }
   end
 end
 

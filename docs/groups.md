@@ -137,6 +137,22 @@ class ApplicationFeature < Featury::Base
   action :enabled?, web: :enabled? do |features:, **options|
     features.all? { |feature| Flipper.enabled?(feature, *options.values) }
   end
+
+  action :disabled?, web: :regular do |features:, **options|
+    features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
+  end
+
+  action :enable, web: :enable do |features:, **options|
+    features.all? { |feature| Flipper.enable(feature, *options.values) }
+  end
+
+  action :disable, web: :disable do |features:, **options|
+    features.all? { |feature| Flipper.disable(feature, *options.values) }
+  end
+
+  action :add, web: :regular do |features:, **options|
+    features.all? { |feature| Flipper.add(feature, *options.values) }
+  end
 end
 
 class BillingFeature < ApplicationFeature
@@ -163,11 +179,43 @@ class ApplicationFeature < Featury::Base
   action :enabled?, web: :enabled? do |features:, **options|
     features.all? { |feature| Flipper.enabled?(feature, *options.values) }
   end
+
+  action :disabled?, web: :regular do |features:, **options|
+    features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
+  end
+
+  action :enable, web: :enable do |features:, **options|
+    features.all? { |feature| Flipper.enable(feature, *options.values) }
+  end
+
+  action :disable, web: :disable do |features:, **options|
+    features.all? { |feature| Flipper.disable(feature, *options.values) }
+  end
+
+  action :add, web: :regular do |features:, **options|
+    features.all? { |feature| Flipper.add(feature, *options.values) }
+  end
 end
 
 class CustomFeature < Featury::Base
   action :enabled?, web: :enabled? do |features:, **options|
     features.all? { |feature| CustomFeatureSystem.enabled?(feature, *options.values) }
+  end
+
+  action :disabled?, web: :regular do |features:, **options|
+    features.any? { |feature| !CustomFeatureSystem.enabled?(feature, *options.values) }
+  end
+
+  action :enable, web: :enable do |features:, **options|
+    features.all? { |feature| CustomFeatureSystem.enable(feature, *options.values) }
+  end
+
+  action :disable, web: :disable do |features:, **options|
+    features.all? { |feature| CustomFeatureSystem.disable(feature, *options.values) }
+  end
+
+  action :add, web: :regular do |features:, **options|
+    features.all? { |feature| CustomFeatureSystem.add(feature, *options.values) }
   end
 end
 

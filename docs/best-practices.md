@@ -250,9 +250,9 @@ Always check for presence when using `required: false`:
 class AnalyticsFeature < ApplicationFeature
   resource :user, type: User, option: true, required: false
 
-  condition ->(resources:) do
+  condition lambda { |resources:|
     resources.user.nil? || resources.user.analytics_enabled?
-  end
+  }
 end
 
 # Avoid - Will raise error if user is nil
@@ -366,6 +366,7 @@ RSpec.describe User::OnboardingFeature do
       before { allow(user).to receive(:onboarding_awaiting?).and_return(true) }
 
       it "proceeds to check feature flags" do
+        allow(Flipper).to receive(:enabled?).with(:user_onboarding_passage, user).and_return(true)
         expect(Flipper).to receive(:enabled?).with(:user_onboarding_passage, user)
         User::OnboardingFeature.enabled?(user: user)
       end
@@ -489,24 +490,22 @@ end
 
 ### Use .info for Runtime Discovery
 
-Build admin UIs using the `.info` API:
+Use the `.info` API to dynamically discover features and actions:
 
 ```ruby
-class FeaturesController < ApplicationController
-  def index
-    @feature_classes = [BillingFeature, PaymentFeature]
+feature_classes = [BillingFeature, PaymentFeature]
 
-    @features = @feature_classes.map do |klass|
-      info = klass.info
+features = feature_classes.map do |klass|
+  info = klass.info
 
-      {
-        name: klass.name,
-        features: info.features.all,
-        actions: info.actions.web.all
-      }
-    end
-  end
+  {
+    name: klass.name,
+    features: info.features.all,
+    actions: info.actions.web.all
+  }
 end
+
+# Use this data to build admin UIs, generate documentation, etc.
 ```
 
 ### Generate Documentation
@@ -561,7 +560,7 @@ end
 ```ruby
 # Avoid - Complex business logic in conditions
 class PremiumFeature < ApplicationFeature
-  condition ->(resources:) do
+  condition lambda { |resources:|
     user = resources.user
     subscription = user.subscription
 
@@ -569,7 +568,7 @@ class PremiumFeature < ApplicationFeature
 
     # 50 lines of complex logic
     # ...
-  end
+  }
 end
 
 # Good - Delegate to model methods

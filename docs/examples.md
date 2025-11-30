@@ -24,6 +24,10 @@ class ApplicationFeature < Featury::Base
     features.all? { |feature| Flipper.disable(feature, *options.values) }
   end
 
+  action :add, web: :regular do |features:, **options|
+    features.all? { |feature| Flipper.add(feature, *options.values) }
+  end
+
   before do |action:, features:|
     Rails.logger.info("Executing #{action} on features: #{features}")
   end
@@ -104,12 +108,20 @@ class Organization::FeatureBase < Featury::Base
     features.all? { |feature| Flipper.enabled?(feature, *options.values) }
   end
 
+  action :disabled?, web: :regular do |features:, **options|
+    features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
+  end
+
   action :enable, web: :enable do |features:, **options|
     features.all? { |feature| Flipper.enable(feature, *options.values) }
   end
 
   action :disable, web: :disable do |features:, **options|
     features.all? { |feature| Flipper.disable(feature, *options.values) }
+  end
+
+  action :add, web: :regular do |features:, **options|
+    features.all? { |feature| Flipper.add(feature, *options.values) }
   end
 end
 
@@ -119,9 +131,9 @@ class Organization::PremiumFeature < Organization::FeatureBase
   resource :organization, type: Organization, option: true
   resource :user, type: User, option: true, required: false
 
-  condition ->(resources:) do
+  condition lambda { |resources:|
     resources.organization.subscription&.plan&.in?(["premium", "enterprise"])
-  end
+  }
 
   feature :advanced_analytics, description: "Advanced analytics dashboard"
   feature :custom_branding, description: "Custom branding options"
@@ -177,10 +189,10 @@ class AlphaFeature < ApplicationFeature
 
   resource :user, type: User, option: true, required: false
 
-  condition ->(resources:) do
+  condition lambda { |resources:|
     # Only for staff or opted-in beta testers
     resources.user&.staff? || resources.user&.beta_tester?
-  end
+  }
 
   feature :experimental_ui, description: "Highly experimental UI changes"
   feature :performance_mode, description: "Performance optimization mode"
@@ -217,9 +229,9 @@ class RegionalFeature < ApplicationFeature
 
   resource :user, type: User, option: true
 
-  condition ->(resources:) do
+  condition lambda { |resources:|
     resources.user.country_code.in?(["US", "CA", "GB", "AU"])
-  end
+  }
 
   feature :crypto_payments, description: "Cryptocurrency payment support"
   feature :instant_transfer, description: "Instant bank transfers"
@@ -231,9 +243,9 @@ class EUFeature < ApplicationFeature
 
   resource :user, type: User, option: true
 
-  condition ->(resources:) do
+  condition lambda { |resources:|
     resources.user.country_code.in?(EU_COUNTRY_CODES)
-  end
+  }
 
   feature :gdpr_tools, description: "GDPR compliance tools"
   feature :sepa_payments, description: "SEPA payment support"
@@ -313,30 +325,6 @@ class MaintenanceFeature < ApplicationFeature
   feature :scheduled_jobs, description: "Background jobs maintenance mode"
 end
 
-class ApplicationController < ActionController::Base
-  before_action :check_maintenance
-
-  private
-
-  def check_maintenance
-    # Global maintenance (no user required)
-    if MaintenanceFeature.info.features.all.any? { |f| f.name == :maintenance_global } &&
-       Flipper.enabled?(:maintenance_global)
-      render "maintenance", status: 503
-      return
-    end
-
-    # User-specific maintenance bypass for admins
-    if current_user&.admin?
-      return
-    end
-
-    # Check service-specific maintenance
-    if controller_name == "api" && Flipper.enabled?(:maintenance_api)
-      render json: { error: "API under maintenance" }, status: 503
-    end
-  end
-end
 
 # Usage
 
@@ -395,19 +383,6 @@ AdminFeature.enabled?(user: regular_user)     # => false (condition fails)
 SuperAdminFeature.enabled?(user: super_admin) # => true
 SuperAdminFeature.enabled?(user: admin_user)  # => false (condition fails)
 
-# In controllers
-class AdminController < ApplicationController
-  before_action :require_admin
-
-  private
-
-  def require_admin
-    feature = AdminFeature.with(user: current_user)
-    unless feature.enabled?
-      redirect_to root_path, alert: "Access denied"
-    end
-  end
-end
 ```
 
 ## Time-Based Features
@@ -420,10 +395,10 @@ class SeasonalFeature < ApplicationFeature
 
   resource :user, type: User, option: true, required: false
 
-  condition ->(resources:) do
+  condition lambda { |resources:|
     # Holiday season: November and December
     Date.current.month.in?([11, 12])
-  end
+  }
 
   feature :holiday_theme, description: "Holiday-themed UI"
   feature :gift_cards, description: "Gift card purchases"
@@ -435,13 +410,13 @@ class ScheduledFeature < ApplicationFeature
 
   resource :user, type: User, option: true, required: false
 
-  condition ->(resources:) do
+  condition lambda { |resources:|
     # Active between specific dates
     launch_date = Date.parse("2024-01-15")
     end_date = Date.parse("2024-02-15")
 
     Date.current.between?(launch_date, end_date)
-  end
+  }
 
   feature :limited_campaign, description: "Limited-time campaign"
 end

@@ -366,49 +366,6 @@ audit_features(User::OnboardingFeature)
 
 ## Practical Examples
 
-### Admin Dashboard
-
-```ruby
-class FeaturesController < ApplicationController
-  def index
-    @feature_classes = [
-      User::OnboardingFeature,
-      BillingFeature,
-      PaymentSystemFeature
-    ]
-
-    @features = @feature_classes.map do |klass|
-      info = klass.info
-
-      {
-        class: klass.name,
-        actions: info.actions.web.all,
-        features: info.features.all,
-        groups: info.groups.all.map { |g| g.group_class.name }
-      }
-    end
-  end
-
-  def show
-    feature_class = params[:class].constantize
-    info = feature_class.info
-
-    @feature = {
-      actions: info.actions.web.all,
-      enabled_action: info.actions.web.enabled,
-      enable_action: info.actions.web.enable,
-      disable_action: info.actions.web.disable,
-      features: info.features.all,
-      groups: info.groups.all,
-      tree: {
-        features: info.tree.features,
-        groups: info.tree.groups
-      }
-    }
-  end
-end
-```
-
 ### API Documentation Generator
 
 ```ruby

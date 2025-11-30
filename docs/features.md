@@ -102,6 +102,22 @@ class ApplicationFeature < Featury::Base
     features.all? { |feature| Flipper.enabled?(feature, *options.values) }
     # Returns true only if ALL features are enabled
   end
+
+  action :disabled?, web: :regular do |features:, **options|
+    features.any? { |feature| !Flipper.enabled?(feature, *options.values) }
+  end
+
+  action :enable, web: :enable do |features:, **options|
+    features.all? { |feature| Flipper.enable(feature, *options.values) }
+  end
+
+  action :disable, web: :disable do |features:, **options|
+    features.all? { |feature| Flipper.disable(feature, *options.values) }
+  end
+
+  action :add, web: :regular do |features:, **options|
+    features.all? { |feature| Flipper.add(feature, *options.values) }
+  end
 end
 ```
 
