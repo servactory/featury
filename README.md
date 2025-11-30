@@ -13,30 +13,46 @@
   <a href="https://github.com/servactory/featury/releases"><img src="https://img.shields.io/github/release-date/servactory/featury" alt="Release Date"></a>
 </p>
 
-## Purpose
+## 📚 Documentation
 
-Featury is designed to group and manage multiple features within a project.
-It provides the flexibility to utilize any pre-existing solution or create your own.
-It's easily adjustable to align with the unique needs and objectives of your project.
+See [featury.servactory.com](https://featury.servactory.com) for comprehensive guides and API documentation.
 
-[//]: # (## Documentation)
+Complete documentation is also available in the [docs](./docs) directory:
 
-[//]: # (See [featury.servactory.com]&#40;https://featury.servactory.com&#41; for documentation.)
+- [Getting Started](./docs/getting-started.md)
+- [Features](./docs/features.md)
+- [Groups](./docs/groups.md)
+- [Actions](./docs/actions.md)
+- [Resources](./docs/resources.md)
+- [Conditions](./docs/conditions.md)
+- [Working with Features](./docs/working-with-features.md)
+- [Info and Introspection](./docs/info-and-introspection.md)
+- [Integration](./docs/integration.md)
+- [Examples](./docs/examples.md)
+- [Best Practices](./docs/best-practices.md)
 
-## Quick Start
+## 💡 Why Featury?
+
+- 🎯 **Unified Feature Management** — Group and manage multiple feature flags through a single interface with automatic prefix handling
+- 🔌 **Flexible Integration** — Works with any backend: Flipper, Redis, databases, HTTP APIs, or custom solutions
+- 🗂️ **Powerful Organization** — Organize features with prefixes, groups, and nested hierarchies for scalable feature management
+- 🔍 **Rich Introspection** — Full visibility into features, actions, and resources through the comprehensive info API
+- 🪝 **Lifecycle Hooks** — Before/after callbacks for actions with customizable scope and full context access
+- 🛡️ **Type-Safe Resources** — Built on Servactory for robust resource validation, type checking, and automatic coercion
+
+## 🚀 Quick Start
 
 ### Installation
+
+Add Featury to your Gemfile:
 
 ```ruby
 gem "featury"
 ```
 
-### Usage
+### ApplicationFeature
 
-#### Basic class for your features
-
-For instance, assume that you are utilizing Flipper for managing features.
-In such a scenario, the base class could potentially be structured as follows:
+Create a base class that defines how features interact with your feature flag system:
 
 ```ruby
 class ApplicationFeature < Featury::Base
@@ -70,17 +86,9 @@ class ApplicationFeature < Featury::Base
 end
 ```
 
-#### About the `web:` key
+### Feature Definitions
 
-The `web:` key in the action definition allows you to specify which method will be used for web interactions. This is useful for mapping internal action names to external endpoints or UI actions. For example:
-
-- `enabled?` — the method that will be used in the web context to check the state of a feature flag;
-- `enable` — the method that will be used in the web context to enable a feature flag;
-- `disable` — the method that will be used in the web context to disable a feature flag.
-
-This mapping helps you clearly separate internal logic from the interface exposed to web clients.
-
-#### Features of your project
+Define features with prefixes, resources, conditions, and groups:
 
 ```ruby
 class User::OnboardingFeature < ApplicationFeature
@@ -115,108 +123,29 @@ class PaymentSystemFeature < ApplicationFeature
 end
 ```
 
-The `resource` method provides an indication of how the transmitted information ought to be processed.
-Besides the options provided by [Servactory](https://github.com/servactory/servactory), additional ones are available for stipulating the processing mode of the transmitted data.
-
-If a resource needs to be conveyed as a feature flag option, utilize the `option` parameter:
-
-```ruby 
-resource :user, type: User, option: true
-```
-
-To call a feature without passing a resource, use the `required: false` option (e.g., for managing the global state of the feature).
-
-```ruby 
-resource :user, type: User, option: true, required: false
-```
-
-To transfer a resource to a nested group, utilize the `nested` option:
+### Usage
 
 ```ruby
-resource :user, type: User, nested: true
-```
-
-#### Working with the features of your project
-
-Each of these actions will be applied to every feature flag.
-Subsequently, the outcome of these actions will be contingent upon the combined results of all feature flags.
-
-```ruby
+# Direct method calls
 User::OnboardingFeature.enabled?(user:) # => true
-User::OnboardingFeature.disabled?(user:) # => false
-User::OnboardingFeature.enable(user:) # => true
-User::OnboardingFeature.disable(user:) # => true
-```
+User::OnboardingFeature.enable(user:)   # => true
+User::OnboardingFeature.disable(user:)  # => true
 
-You can also utilize the `with` method to pass necessary arguments.
-
-```ruby
+# Using .with() method
 feature = User::OnboardingFeature.with(user:)
-
 feature.enabled? # => true
-feature.disabled? # => false
-feature.enable # => true
-feature.disable # => true
+feature.enable   # => true
+feature.disable  # => true
 ```
 
-If a feature flag is deactivated, possibly via automation processes,
-the primary feature class subsequently responds with `false` when
-queried about its enablement status.
+## 🤝 Contributing
 
-In the preceding example, there might be a scenario where the payment system is
-undergoing technical maintenance and therefore is temporarily shut down.
-Consequently, the onboarding process for new users will be halted until further notice.
+This project is intended to be a safe, welcoming space for collaboration. Contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct. We recommend reading the [contributing guide](./CONTRIBUTING.md) as well.
 
-#### Feature and Group descriptions
+## 🙏 Acknowledgments
 
-When defining features and groups, you can provide descriptions to add more context about what they do:
+Featury is built and maintained by amazing [contributors](https://github.com/servactory/featury/graphs/contributors).
 
-```ruby
-# Adding a feature with description
-feature :api, description: "External API integration"
-
-# Adding a group with description
-group PaymentSystemFeature, description: "Payment processing functionality"
-```
-
-These descriptions are preserved in the feature tree and can be accessed via the info method.
-
-#### Information about features
-
-```ruby
-info = User::OnboardingFeature.info
-```
-
-```ruby
-# Feature actions information (all actions and web actions)
-info.actions.all          # All actions: [:enabled?, :disabled?, :enable, :disable, :add]
-info.actions.web.all      # Web actions: [:enabled?, :disabled?, :enable, :disable, :add]
-
-# Access specific web actions by their web: option name
-info.actions.web.enabled  # Returns the method name (:enabled?) that was defined with `web: :enabled?`
-info.actions.web.enable   # Returns the method name (:enable) that was defined with `web: :enable`
-info.actions.web.disable  # Returns the method name (:disable) that was defined with `web: :disable`
-
-# Feature resources information
-info.resources            # Feature resources of the current class.
-
-# Feature flags information (with descriptions)
-info.features             # Feature flags of the current class with their names and descriptions.
-
-# Feature groups information (with descriptions)
-info.groups               # Feature groups of the current class with their class references and descriptions.
-
-# Complete feature tree (features and nested groups)
-info.tree.features        # Direct features of the current class.
-info.tree.groups          # Features from nested groups.
-```
-
-## Contributing
-
-This project is intended to be a safe, welcoming space for collaboration. 
-Contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct. 
-We recommend reading the [contributing guide](./CONTRIBUTING.md) as well.
-
-## License
+## 📄 License
 
 Featury is available as open source under the terms of the [MIT License](./LICENSE).
