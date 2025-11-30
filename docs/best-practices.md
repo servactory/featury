@@ -250,9 +250,9 @@ Always check for presence when using `required: false`:
 class AnalyticsFeature < ApplicationFeature
   resource :user, type: User, option: true, required: false
 
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     resources.user.nil? || resources.user.analytics_enabled?
-  }
+  end)
 end
 
 # Avoid - Will raise error if user is nil
@@ -363,10 +363,12 @@ RSpec.describe User::OnboardingFeature do
 
   describe "condition" do
     context "when user is awaiting onboarding" do
-      before { allow(user).to receive(:onboarding_awaiting?).and_return(true) }
+      before do
+        allow(user).to receive(:onboarding_awaiting?).and_return(true)
+        allow(Flipper).to receive(:enabled?).with(:user_onboarding_passage, user).and_return(true)
+      end
 
       it "proceeds to check feature flags" do
-        allow(Flipper).to receive(:enabled?).with(:user_onboarding_passage, user).and_return(true)
         expect(Flipper).to receive(:enabled?).with(:user_onboarding_passage, user)
         User::OnboardingFeature.enabled?(user: user)
       end
@@ -560,7 +562,7 @@ end
 ```ruby
 # Avoid - Complex business logic in conditions
 class PremiumFeature < ApplicationFeature
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     user = resources.user
     subscription = user.subscription
 
@@ -568,7 +570,7 @@ class PremiumFeature < ApplicationFeature
 
     # 50 lines of complex logic
     # ...
-  }
+  end)
 end
 
 # Good - Delegate to model methods

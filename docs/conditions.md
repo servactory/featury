@@ -31,9 +31,9 @@ class User::OnboardingFeature < ApplicationFeature
   resource :user, type: User, option: true
   resource :account, type: Account, option: true
 
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     resources.user.active? && resources.account.premium?
-  }
+  end)
 end
 ```
 
@@ -88,9 +88,9 @@ class OrganizationFeature < ApplicationFeature
   resource :organization, type: Organization, option: true
   resource :user, type: User, option: true
 
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     resources.organization.active? && resources.user.admin?
-  }
+  end)
 
   feature :admin_panel
 end
@@ -104,10 +104,10 @@ When using `required: false`, check for resource presence:
 class AnalyticsFeature < ApplicationFeature
   resource :user, type: User, option: true, required: false
 
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     # Check if user is provided before accessing it
     resources.user.nil? || resources.user.analytics_enabled?
-  }
+  end)
 
   feature :tracking
 end
@@ -121,10 +121,10 @@ end
 class BillingFeature < ApplicationFeature
   resource :user, type: User, option: true
 
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     resources.user.subscription&.active? &&
       resources.user.subscription&.plan&.premium?
-  }
+  end)
 
   feature :api
 end
@@ -136,9 +136,9 @@ end
 class SeasonalFeature < ApplicationFeature
   resource :user, type: User, option: true
 
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     Date.current.month.in?([11, 12]) && resources.user.active?
-  }
+  end)
 
   feature :holiday_theme
 end
@@ -150,9 +150,9 @@ end
 class ExperimentalFeature < ApplicationFeature
   resource :user, type: User, option: true
 
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     ExperimentService.user_enrolled?(resources.user.id)
-  }
+  end)
 
   feature :beta_ui
 end
@@ -264,9 +264,9 @@ end
 class PremiumFeature < ApplicationFeature
   resource :user, type: User, option: true
 
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     resources.user.subscription&.tier&.in?(["premium", "enterprise"])
-  }
+  end)
 
   feature :advanced_analytics
 end
@@ -278,9 +278,9 @@ end
 class OnboardingStepFeature < ApplicationFeature
   resource :user, type: User, option: true
 
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     resources.user.onboarding_state == "step_2"
-  }
+  end)
 
   feature :step_2_completion
 end
@@ -292,9 +292,9 @@ end
 class RegionalFeature < ApplicationFeature
   resource :user, type: User, option: true
 
-  condition lambda { |resources:|
+  condition(lambda do |resources:|
     resources.user.country_code.in?(["US", "CA", "GB"])
-  }
+  end)
 
   feature :regional_payment_method
 end
@@ -309,7 +309,10 @@ RSpec.describe User::OnboardingFeature do
   let(:user) { User.new }
 
   context "when user is awaiting onboarding" do
-    before { allow(user).to receive(:onboarding_awaiting?).and_return(true) }
+    before do
+      allow(user).to receive(:onboarding_awaiting?).and_return(true)
+      allow(Flipper).to receive(:enabled?).with(:user_onboarding_passage, user).and_return(true)
+    end
 
     it "checks the feature flag" do
       expect(Flipper).to receive(:enabled?).with(:user_onboarding_passage, user)
