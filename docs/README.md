@@ -41,8 +41,11 @@ Featury is a feature flag management library that provides:
 - **Lifecycle Hooks**: Before/after callbacks with customizable scope
 - **Rich Introspection**: Complete visibility into your feature configuration
 
+Visit [featury.servactory.com](https://featury.servactory.com) for comprehensive guides, API documentation, and tutorials.
+
 ## Quick Links
 
+- [Official Documentation](https://featury.servactory.com)
 - [GitHub Repository](https://github.com/servactory/featury)
 - [RubyGems](https://rubygems.org/gems/featury)
 - [Changelog](https://github.com/servactory/featury/blob/main/CHANGELOG.md)

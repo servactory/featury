@@ -13,9 +13,11 @@
   <a href="https://github.com/servactory/featury/releases"><img src="https://img.shields.io/github/release-date/servactory/featury" alt="Release Date"></a>
 </p>
 
-## Documentation
+## 📚 Documentation
 
-Complete documentation is available in the [docs](./docs) directory:
+See [featury.servactory.com](https://featury.servactory.com) for comprehensive guides and API documentation.
+
+Complete documentation is also available in the [docs](./docs) directory:
 
 - [Getting Started](./docs/getting-started.md)
 - [Features](./docs/features.md)
@@ -29,21 +31,16 @@ Complete documentation is available in the [docs](./docs) directory:
 - [Examples](./docs/examples.md)
 - [Best Practices](./docs/best-practices.md)
 
-## Why Featury?
+## 💡 Why Featury?
 
-**Unified Feature Management** — Group and manage multiple feature flags through a single interface with automatic prefix handling
+- 🎯 **Unified Feature Management** — Group and manage multiple feature flags through a single interface with automatic prefix handling
+- 🔌 **Flexible Integration** — Works with any backend: Flipper, Redis, databases, HTTP APIs, or custom solutions
+- 🗂️ **Powerful Organization** — Organize features with prefixes, groups, and nested hierarchies for scalable feature management
+- 🔍 **Rich Introspection** — Full visibility into features, actions, and resources through the comprehensive info API
+- 🪝 **Lifecycle Hooks** — Before/after callbacks for actions with customizable scope and full context access
+- 🛡️ **Type-Safe Resources** — Built on Servactory for robust resource validation, type checking, and automatic coercion
 
-**Flexible Integration** — Works with any backend: Flipper, Redis, databases, HTTP APIs, or custom solutions
-
-**Powerful Organization** — Organize features with prefixes, groups, and nested hierarchies for scalable feature management
-
-**Rich Introspection** — Full visibility into features, actions, and resources through the comprehensive info API
-
-**Lifecycle Hooks** — Before/after callbacks for actions with customizable scope and full context access
-
-**Type-Safe Resources** — Built on Servactory for robust resource validation, type checking, and automatic coercion
-
-## Quick Start
+## 🚀 Quick Start
 
 ### Installation
 
@@ -141,12 +138,14 @@ feature.enable   # => true
 feature.disable  # => true
 ```
 
-## Contributing
+## 🤝 Contributing
 
-This project is intended to be a safe, welcoming space for collaboration.
-Contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-We recommend reading the [contributing guide](./CONTRIBUTING.md) as well.
+This project is intended to be a safe, welcoming space for collaboration. Contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct. We recommend reading the [contributing guide](./CONTRIBUTING.md) as well.
 
-## License
+## 🙏 Acknowledgments
+
+Featury is built and maintained by amazing [contributors](https://github.com/servactory/featury/graphs/contributors).
+
+## 📄 License
 
 Featury is available as open source under the terms of the [MIT License](./LICENSE).
